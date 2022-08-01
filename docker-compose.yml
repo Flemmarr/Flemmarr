@@ -1,0 +1,93 @@
+version: "3"
+services:
+  sonarr:
+    container_name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
+    ports:
+      - 8989:8989
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - TZ=Europe/Stockholm
+    volumes:
+      - "~/config/sonarr:/config"
+      - "~/data:/data"
+    restart: unless-stopped
+  radarr:
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:latest
+    ports:
+      - 7878:7878
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - TZ=Europe/Stockholm
+    volumes:
+      - "~/config/radarr:/config"
+      - "~/data:/data"
+    restart: unless-stopped
+  lidarr:
+    container_name: lidarr
+    image: lscr.io/linuxserver/lidarr:latest
+    ports:
+      - 8686:8686
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - TZ=Europe/Stockholm
+    volumes:
+      - "~/config/lidarr:/config"
+      - "~/data:/data"
+    restart: unless-stopped
+  readarr:
+    container_name: readarr
+    image: lscr.io/linuxserver/readarr:develop
+    ports:
+      - 8787:8787
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - TZ=Europe/Stockholm
+    volumes:
+      - "~/config/readarr:/config"
+      - "~/data:/data"
+    restart: unless-stopped
+  prowlarr:
+    container_name: prowlarr
+    image: lscr.io/linuxserver/prowlarr:develop
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - TZ=Europe/Stockholm
+    volumes:
+      - "~/config/prowlarr:/config"
+    ports:
+      - 9696:9696
+    restart: unless-stopped
+  transmission:
+    container_name: transmission
+    image: lscr.io/linuxserver/transmission:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=022
+      - TZ=Europe/Stockholm
+    volumes:
+      - "~/config/transmission:/config"
+      - "~/data/downloads/torrents:/downloads"
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+  flemmarr:
+    container_name: flemmarr
+    image: pierremesure/flemmarr:latest
+    # build: ./
+    volumes:
+      - "./config/flemmarr:/config"
