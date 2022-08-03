@@ -79,7 +79,7 @@ services:
       - TZ=Europe/Stockholm
     volumes:
       - "~/config/transmission:/config"
-      - "~/data/downloads/torrents:/downloads"
+      - "~/data/downloads/torrents:/data/downloads/torrents"
     ports:
       - 9091:9091
       - 51413:51413
