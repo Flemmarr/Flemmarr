@@ -1,5 +1,7 @@
 from enum import Enum
 
+CONFIG_DEFAULT_LOCATION = './config/config.yml'
+
 API_BASES = {
     "readarr": "/api/v1",
     "radarr": "/api/v3",

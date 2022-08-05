@@ -1,6 +1,6 @@
 import yaml
 from api import Api
-from constants import Service
+from constants import Service, CONFIG_DEFAULT_LOCATION
 
 
 class Config:
@@ -9,7 +9,7 @@ class Config:
         self._api = None
 
     @classmethod
-    def from_yaml(cls, file: str = './config/config.yml'):
+    def from_yaml(cls, file: str = CONFIG_DEFAULT_LOCATION):
         with open(file, "r") as f:
             cfg = yaml.safe_load(f)
         return cls(cfg)
