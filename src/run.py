@@ -1,19 +1,6 @@
-import yaml
-from api import Api
+from config import Config
 
-configs = yaml.safe_load(open('./config/config.yml', 'r'))
+cfg = Config.from_yaml()
+cfg.apply()
 
-for key in configs:
-    config = configs[key]
-    server = config['server']
-    config.pop('server')
-
-    api = Api(server['address'], server['port'])
-
-    print('Trying to connect to {}'.format(key))
-    api.initialize()
-
-    print('Starting to apply configuration')
-    api.apply(config)
-
-print('Finished to apply configurations')
+print('Finished applying configurations')

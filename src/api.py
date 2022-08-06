@@ -1,90 +1,63 @@
+from typing import Optional
+
 import requests
 from urllib3.util import Retry
 
-class Api(object):
+from constants import API_BASES, Service
 
-    def __init__(self, address, port):
-        self.address = address
+
+class Api:
+    def __init__(self, service: Service, address: str, port: int, api_key: Optional[str] = None):
+        self.r = None
         self.port = port
-        self.path = ''
+        self.api_key = api_key
+        self.path = API_BASES[service.value]
+        self.address = address if address.startswith('http') else 'http://' + address
 
+    @property
+    def base_url(self) -> str:
+        return f"{self.address}:{self.port}{self.path}"
+
+    def initialize(self):
         adapter = requests.adapters.HTTPAdapter(max_retries=Retry(total=10, backoff_factor=0.1))
-
         self.r = requests.Session()
         self.r.mount('http://', adapter)
         self.r.mount('https://', adapter)
 
-    def __url(self, resource='', id=None):
-        address = self.address if self.address.startswith('http') else 'http://' + self.address
-        id_path = '/{}'.format(id) if id else ''
-        return '{}:{}{}{}{}'.format(address, self.port, self.path, resource, id_path)
+        if not self.api_key:
+            print("No api key in config, fetching api key instead.")
+            response = self.r.get(f"{self.address}:{self.port}/initialize.js")
+            bits = response.text.split("'")
+            self.api_key = bits[3]
 
-    def __get(self, resource, id=None):
-        response = self.r.get(self.__url(resource, id))
-        status_code = response.status_code
+        self.r.headers.update({'X-Api-Key': self.api_key})
 
-        if id:
-            id_string = ' {}'.format(id)
-        else:
-            id_string = ''
+        self.get("/health")  # Test connection
+        print('Successfully connected to the server.')
 
-        print('Fetching {}{}: {}'.format(resource, id_string, status_code))
+    def get(self, resource, id=None) -> dict:
+        req = f"{self.base_url}{resource}{'/' + id if id else ''}"
+        print(f"Fetching: {req}")
+        response = self.r.get(req)
+        response.raise_for_status()
+        return response.json()
 
-        if status_code < 300:
-            return response.json()
+    def create(self, resource, body) -> None:
+        req = f"{self.base_url}{resource}"
+        print(f"Creating: {req}")
+        response = self.r.post(req, json=body)
+        response.raise_for_status()
 
-    def __create(self, resource, body):
-        response = self.r.post(self.__url(resource), json=body)
-        status_code = response.status_code
+    def edit(self, resource, body, id=None) -> None:
+        req = f"{self.base_url}{resource}{'/' + id if id else ''}"
+        print(f"Editing: {req}")
+        settings = self.get(resource, id)
+        settings.update(body)
+        response = self.r.put(req, json=settings)
+        response.raise_for_status()
 
-        if status_code < 300:
-            print('Creating {} {}: {}'.format(resource, response.json()['id'], status_code))
-            return response.json()
-        else:
-            print('Creating {}: {}'.format(resource, status_code))
-
-    def __edit(self, resource, body, id=None):
-        old_version = self.__get(resource, id)
-
-        for key in body:
-            old_version[key] = body[key]
-
-        status_code = self.r.put(self.__url(resource, id), json=old_version).status_code
-
-        if id:
-            id_string = ' {}'.format(id)
-        else:
-            id_string = ''
-
-        print('Editing {}{}: {}'.format(resource, id_string, status_code))
-
-    def __delete(self, resource, id):
-        status_code = self.r.delete(self.__url(resource, id)).status_code
-
-        print('Deleting {} {}: {}'.format(resource, id, status_code))
-
-    def __triage_and_apply(self, object, resource=''):
-        if isinstance(object, dict):
-            if any(isinstance(object[key], (dict, list)) for key in object):
-                for key in object:
-                    self.__triage_and_apply(object[key], '{}/{}'.format(resource, key))
-            else:
-                self.__edit(resource, object)
-        else:
-            for body in object:
-                self.__create(resource, body)
-
-    def initialize(self):
-        response = self.r.get('{}/initialize.js'.format(self.__url()))
-
-        bits = response.text.split("'")
-        api_root = bits[1]
-        api_key = bits[3]
-
-        self.path = api_root
-        self.r.headers.update({'X-Api-Key': api_key})
-
-        print('Successfully connected to the server and fetched the API key and path')
-
-    def apply(self, config):
-        self.__triage_and_apply(config)
+    def delete(self, resource, id) -> None:
+        req = f"{self.base_url}{resource}/{id}"
+        print(f"Deleting: {req}")
+        response = self.r.delete(req)
+        response.raise_for_status()
