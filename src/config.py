@@ -10,7 +10,7 @@ class Config:
 
     @classmethod
     def from_yaml(cls, file: str = CONFIG_DEFAULT_LOCATION):
-        cfg = parse_config(file)
+        cfg = parse_config(file, default_value='')
         return cls(cfg)
 
     def apply(self):

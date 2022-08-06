@@ -26,7 +26,7 @@ class Api:
 
         if not self.api_key:
             print("No api key in config, fetching api key instead.")
-            response = self.r.get(f"{self.base_url}/initialize.js")
+            response = self.r.get(f"{self.address}:{self.port}/initialize.js")
             bits = response.text.split("'")
             self.api_key = bits[3]
 
