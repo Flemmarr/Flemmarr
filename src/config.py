@@ -1,5 +1,5 @@
-import yaml
 from api import Api
+from pyaml_env import parse_config
 from constants import Service, CONFIG_DEFAULT_LOCATION
 
 
@@ -10,13 +10,13 @@ class Config:
 
     @classmethod
     def from_yaml(cls, file: str = CONFIG_DEFAULT_LOCATION):
-        with open(file, "r") as f:
-            cfg = yaml.safe_load(f)
+        cfg = parse_config(file)
         return cls(cfg)
 
     def apply(self):
         for app in self._cfg:
             self._api = Api(Service(app), **self._cfg[app].pop('server'))
+            self._api.initialize()
             self._triage_and_apply(self._cfg[app])
 
     def _triage_and_apply(self, object, resource: str = ''):
@@ -29,4 +29,3 @@ class Config:
         elif isinstance(object, list):
             for body in object:
                 self._api.create(resource, body)  # TODO: Idempotency?
-        raise NotImplementedError  # can't happen?
