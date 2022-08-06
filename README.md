@@ -57,7 +57,7 @@ lidarr:
       defaultMetadataProfileId: 1
 ```
 
-Check out the example [config.yml](config/flemmarr/config.yml) with more settings for various apps. Use environment variables where needed by using the `!ENV ${ENV_VAR}` syntax. They can be added through the `docker run -e` flag or in the `docker-compose` file.
+Check out the example [config.yml](config/flemmarr/config.yml) with more settings for various apps. Use environment variables where needed by using the `!ENV ${ENV_VAR}` syntax. They can be added in an untracked `.env` file.
 
 **NB:** Unfortunately, I found the APIs for all -arr tools to be of poor quality. Oftentimes, some fields are needed for no reason, default values are not the same as the ones applied by the GUI.
 
