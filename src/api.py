@@ -75,7 +75,13 @@ class Api(object):
                 self.__create(resource, body)
 
     def initialize(self):
-        response = self.r.get('{}/initialize.js'.format(self.__url()))
+        url = '{}/initialize.js'.format(self.__url())
+        response = self.r.get(url)
+        status_code = response.status_code
+
+        while response.status_code >= 300:
+            sleep(10)
+            response = self.r.get(url)
 
         bits = response.text.split("'")
         api_root = bits[1]
