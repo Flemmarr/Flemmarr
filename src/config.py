@@ -25,7 +25,10 @@ class Config:
                 for key in object:
                     self._triage_and_apply(object[key], f"{resource}/{key}")
             else:
-                self._api.edit(resource, object)
+                self._api.edit(resource, object, object['id'])
         elif isinstance(object, list):
             for body in object:
-                self._api.create(resource, body)  # TODO: Idempotency?
+                if 'id' in body:
+                    self._api.edit(resource, body, body['id'])
+                else:
+                    self._api.create(resource, body)  # TODO: Idempotency?

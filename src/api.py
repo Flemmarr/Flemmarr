@@ -1,6 +1,7 @@
 from typing import Optional
 
 import requests
+from requests.exceptions import HTTPError
 from urllib3.util import Retry
 
 from constants import API_BASES, Service
@@ -36,7 +37,7 @@ class Api:
         print('Successfully connected to the server.')
 
     def get(self, resource, id=None) -> dict:
-        req = f"{self.base_url}{resource}{'/' + id if id else ''}"
+        req = f"{self.base_url}{resource}{'/' + str(id) if id else ''}"
         print(f"Fetching: {req}")
         response = self.r.get(req)
         response.raise_for_status()
@@ -44,17 +45,28 @@ class Api:
 
     def create(self, resource, body) -> None:
         req = f"{self.base_url}{resource}"
-        print(f"Creating: {req}")
-        response = self.r.post(req, json=body)
-        response.raise_for_status()
+        try:
+            response = self.r.post(req, json=body)
+            response.raise_for_status()
+        except HTTPError as e:
+            if e.response.status_code == 400 and 'indexer' in resource:  # temp
+                pass
+            else:
+                raise HTTPError(f"{e.response.status_code} Error for resource: {resource}. Response: {e.response.text}")
 
-    def edit(self, resource, body, id=None) -> None:
-        req = f"{self.base_url}{resource}{'/' + id if id else ''}"
-        print(f"Editing: {req}")
-        settings = self.get(resource, id)
-        settings.update(body)
-        response = self.r.put(req, json=settings)
-        response.raise_for_status()
+    def edit(self, resource, body, id) -> None:
+        req = f"{self.base_url}{resource}{'/' + str(id) if id else ''}"
+        settings = {}
+        try:
+            settings = self.get(resource, id)
+        except HTTPError as e:
+            if e.response.status_code == 404:
+                del body['id']  # can't create with existing ID
+                return self.create(resource, body)
+        if settings != body:  # only if updated / not default
+            settings.update(body)
+            response = self.r.put(req, json=settings)
+            response.raise_for_status()
 
     def delete(self, resource, id) -> None:
         req = f"{self.base_url}{resource}/{id}"
