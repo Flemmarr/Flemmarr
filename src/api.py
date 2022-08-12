@@ -13,6 +13,7 @@ class Api:
         self.port = port
         self.api_key = api_key
         self.path = API_BASES[service.value]
+        self.service = service.value
         self.address = address if address.startswith('http') else 'http://' + address
 
     @property
@@ -56,16 +57,16 @@ class Api:
 
     def edit(self, resource, body, id) -> None:
         req = f"{self.base_url}{resource}{'/' + str(id) if id else ''}"
-        settings = {}
+        current_settings = {}
         try:
-            settings = self.get(resource, id)
+            current_settings = self.get(resource, id)
         except HTTPError as e:
             if e.response.status_code == 404:
                 del body['id']  # can't create with existing ID
                 return self.create(resource, body)
-        if settings != body:  # only if updated / not default
-            settings.update(body)
-            response = self.r.put(req, json=settings)
+        if not body.items() <= current_settings.items():  # only if updated / not default
+            current_settings.update(body)  # apply changes
+            response = self.r.put(req, json=current_settings)
             response.raise_for_status()
 
     def delete(self, resource, id) -> None:

@@ -25,10 +25,11 @@ class Config:
                 for key in object:
                     self._triage_and_apply(object[key], f"{resource}/{key}")
             else:
-                self._api.edit(resource, object, object['id'])
+                print(f"calling edit: {resource=}")
+                self._api.edit(resource, object, object['id'])  # even non-list item has id (like config/ui)
         elif isinstance(object, list):
             for body in object:
-                if 'id' in body:
-                    self._api.edit(resource, body, body['id'])
-                else:
-                    self._api.create(resource, body)  # TODO: Idempotency?
+                if 'id' not in body:  # all list items should have id's
+                    raise
+                print(f"calling edit with id: {resource=}")
+                self._api.edit(resource, body, body['id'])
