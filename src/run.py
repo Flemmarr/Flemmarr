@@ -1,13 +1,18 @@
 from config import Config
-from constants import Service
+
+
+def main():
+    cfg = Config.from_yaml()
+    # Only adding 'server' means we are in backup mode
+    if any([True for _, settings in cfg.cfg.items() if list(settings.keys()) == ['server']]):
+        current_config = Config.from_current(cfg.cfg)
+        current_config.to_file()
+        print('Backed-up current configurations')
+        return
+
+    cfg.apply()
+    print('Finished applying configurations')
 
 
 if __name__ == "__main__":
-    cfg = Config.from_current('radarr', 'http://192.168.178.47', 7878)
-    cfg.to_file('radarr-test.yml')
-
-
-    # cfg = Config.from_yaml('test-cfg2.yml')
-    # cfg.apply()
-    #
-    # print('Finished applying configurations')
+    main()

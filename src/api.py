@@ -21,6 +21,7 @@ class Api:
         return f"{self.address}:{self.port}{self.path}"
 
     def initialize(self):
+        print(f"Initializing connection to {self.service}")
         adapter = requests.adapters.HTTPAdapter(max_retries=Retry(total=10, backoff_factor=0.1))
         self.r = requests.Session()
         self.r.mount('http://', adapter)

@@ -87,7 +87,7 @@ services:
     restart: unless-stopped
   flemmarr:
     container_name: flemmarr
-    image: pierremesure/flemmarr:latest
-    # build: ./
+#    image: pierremesure/flemmarr:latest
+    build: ./
     volumes:
       - "./config/flemmarr:/config"

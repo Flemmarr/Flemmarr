@@ -17,3 +17,6 @@ class Service(Enum):
     SONARR = "sonarr"
     PROWLARR = "prowlarr"
     LIDARR = "lidarr"
+
+
+UNWANTED_CFG_FIELDS = ["label", "helpText", "advanced", "type", "placeholder", "infoLink", "hint", "selectOptions", "order"]
