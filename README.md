@@ -70,6 +70,11 @@ If you cannot find how to change a specific part of the configuration in this fi
 
 Once you've found the solution, please add it to the example config file so others can benefit from your knowledge.
 
+## Backup
+A backup of the current configuration will be created automatically and stored in `/config/config_backup.yml`. If you only want
+to create a backup and do not apply a config, simply do not provide a `/config/config.yml` file.
+
+
 ## Contributing
 
 I created Flemmarr because I was shocked when I couldn't find a way to write configuration as code for any of the -arr applications. I hope it is useful to more.

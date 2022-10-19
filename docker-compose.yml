@@ -91,3 +91,14 @@ services:
     build: ./
     volumes:
       - "./config/flemmarr:/config"
+    environment:
+      - SONARR_ADDRESS=sonarr
+      - SONARR_PORT=8989
+      - RADARR_ADDRESS=radarr
+      - RADARR_PORT=7878
+      - LIDARR_ADDRESS=lidarr
+      - LIDARR_PORT=8686
+      - READARR_ADDRESS=readarr
+      - READARR_PORT=8787
+      - PROWLARR_ADDRESS=prowlarr
+      - PROWLARR_PORT=9696

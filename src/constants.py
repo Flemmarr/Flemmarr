@@ -1,6 +1,9 @@
+import json
 from enum import Enum
 
 CONFIG_DEFAULT_LOCATION = './config/config.yml'
+BACKUP_DEFAULT_LOCATION = './config/config_backup.yml'
+API_PATHS_LOCATION = 'routes.json'
 
 API_BASES = {
     "readarr": "/api/v1",
@@ -9,6 +12,9 @@ API_BASES = {
     "prowlarr": "/api/v1",
     "lidarr": "/api/v1"
 }
+
+with open(API_PATHS_LOCATION) as f:
+    PATHS = json.load(f)
 
 
 class Service(Enum):
@@ -19,4 +25,14 @@ class Service(Enum):
     LIDARR = "lidarr"
 
 
-UNWANTED_CFG_FIELDS = ["label", "helpText", "advanced", "type", "placeholder", "infoLink", "hint", "selectOptions", "order"]
+UNWANTED_CFG_FIELDS = [
+    "label",
+    "helpText",
+    "advanced",
+    "type",
+    "placeholder",
+    "infoLink",
+    "hint",
+    "selectOptions",
+    "order"
+]
