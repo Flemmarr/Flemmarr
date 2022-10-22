@@ -68,7 +68,8 @@ class Api:
             current_settings = self.get(resource, id)
         except HTTPError as e:
             if e.response.status_code == 404:
-                del body['id']  # can't pass an id when creating new resource
+                if 'id' in body:  # could be removed if we remove id's from backups
+                    del body['id']
                 return self.create(resource, body)
             raise
         if not body.items() <= current_settings.items():  # check if not subset
