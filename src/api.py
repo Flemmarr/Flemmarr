@@ -43,43 +43,53 @@ class Api:
         print('Successfully connected to the server.')
         return self
 
-    def get(self, resource: str, id: Optional[int] = None) -> dict:
+    @staticmethod
+    def raise_for_status_and_log(response):
+        try:
+            response.raise_for_status()
+        except HTTPError:
+            print(f"ERROR on: {response.url}")
+            print(response.json())
+            raise
+
+    def get(self, resource: str) -> dict:
         """Perform a get request on resource with optional id."""
-        req = f"{self.base_url}{resource}{'/' + str(id) if id else ''}"
+        req = f"{self.base_url}{resource}"
         print(f"Fetching: {req}")
         response = self.session.get(req)
-        response.raise_for_status()
+        self.raise_for_status_and_log(response)
         return response.json()
 
-    def create(self, resource: str, body: dict) -> None:
-        """Create a new resource."""
-        response = self.session.post(f"{self.base_url}{resource}", json=body)
-        response.raise_for_status()
+    def create(self, resource: str, body: list) -> None:
+        """Create a list of resources (while clearing the old)."""
+        old_cfg = self.get(resource)
+        for old_item in old_cfg:
+            try:
+                self.delete(resource, old_item["id"])
+            except HTTPError as e:
+                if e.response.status_code == 405:
+                    print("Skipping global config that cannot be deleted.")
+        for new_item in body:
+            # Some requests can take along time (like setting an indexer in prowlarr).
+            print(resource)
+            if resource == "delayprofile" and new_item['Tags'] == []:
+                self.update(resource, new_item)
+            else:
+                response = self.session.post(f"{self.base_url}{resource}", json=new_item, timeout=40)
+                print(f"Configured (one of): {self.base_url}{resource}")
+                self.raise_for_status_and_log(response)
 
-    def update(self, resource: str, body: dict, id: int) -> None:
-        """Update an existing resource with specified id.
-        -> check if resource already exists
-            -> if not: create
-            -> if it does: check if settings need to be updated.
-                -> if yes: update resource
-                -> if not: skip """
-        req = f"{self.base_url}{resource}{'/' + str(id) if id else ''}"
-        try:
-            current_settings = self.get(resource, id)
-        except HTTPError as e:
-            if e.response.status_code == 404:
-                if 'id' in body:  # could be removed if we remove id's from backups
-                    del body['id']
-                return self.create(resource, body)
-            raise
-        if not body.items() <= current_settings.items():  # check if not subset
-            current_settings.update(body)  # apply changes
-            response = self.session.put(req, json=current_settings)
-            response.raise_for_status()
+    def update(self, resource: str, body: dict) -> None:
+        """Update an existing resource."""
+        cfg = self.get(resource)
+        cfg.update(**body)
+        response = self.session.put(f"{self.base_url}{resource}/{cfg['id']}", json=cfg)
+        print(f"Configured: {self.base_url}{resource}/{cfg['id']}")
+        self.raise_for_status_and_log(response)
 
     def delete(self, resource: str, id: int) -> None:
         """Delete existing resource with specified id."""
         req = f"{self.base_url}{resource}/{id}"
         print(f"Deleting: {req}")
         response = self.session.delete(req)
-        response.raise_for_status()
+        self.raise_for_status_and_log(response)

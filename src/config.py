@@ -58,16 +58,6 @@ class Config(UserDict):
                 for key in obj:
                     self._triage_and_apply(obj[key], api, f"{resource}/{key}")
             else:
-                api.update(resource, obj, 1)  # even non-list items have an id (e.g. config/ui)
+                api.update(resource, obj)
         elif isinstance(obj, list):
-            for id, item in enumerate(obj, start=1):  # *arr id's start at 1
-                api.update(resource, item, id)
-            self._delete_excess_items(resource, obj, api)
-
-    @staticmethod
-    def _delete_excess_items(resource: str, obj: list, api: Api) -> None:
-        """Delete excess items if more are present than in the Config."""
-        n_actual_resources = len(api.get(resource))
-        if n_actual_resources > len(obj):
-            for id in range(len(obj) + 1, n_actual_resources + 1):  # excluding start and including end
-                api.delete(resource, id)
+            api.create(resource, obj)

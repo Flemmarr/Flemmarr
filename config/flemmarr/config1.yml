@@ -1,0 +1,168 @@
+sonarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+  rootfolder:
+    - name: Series
+      path: /data
+      defaultTags: []
+      defaultQualityProfileId: 1
+      defaultMetadataProfileId: 1
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+radarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 2 # 1 = English, 2 = French, 3 = Spanish...
+  rootfolder:
+    - name: Movies
+      path: /data
+      defaultTags: []
+      defaultQualityProfileId: 1
+      defaultMetadataProfileId: 1
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+lidarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 2 # 1 = English, 2 = French, 3 = Spanish...
+  rootfolder:
+    - name: Music
+      path: /data
+      defaultTags: []
+      defaultQualityProfileId: 1
+      defaultMetadataProfileId: 1
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+readarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 2 # 1 = English, 2 = French, 3 = Spanish...
+  rootfolder:
+    - name: Books
+      path: /data
+      defaultTags: []
+      defaultQualityProfileId: 1
+      defaultMetadataProfileId: 1
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+prowlarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      theme: dark
+  indexer:
+    - name: Internet Archive
+      enable: true
+      definitionName: internetarchive
+      implementation: Cardigann
+      configContract: CardigannSettings
+      fields: # What fields are needed for each indexer is a bit obscure.
+        - name: definitionFile
+          value: internetarchive
+        - name: titleOnly
+          value: true
+        - name: noMagnet
+          value: false
+        - name: sort
+          value: 2
+        - name: type
+          value: 1
+      tags: []
+  applications:
+    - name: Sonarr
+      syncLevel: addOnly
+      implementation: Sonarr
+      configContract: SonarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.50:9696
+        - name: baseUrl
+          value: http://192.168.178.50:8989
+        - name: apiKey
+          value: f7fd3a1986ea432982d69dfe54a358d7
+    - name: Radarr
+      syncLevel: addOnly
+      implementation: Radarr
+      configContract: RadarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.50:9696
+        - name: baseUrl
+          value: http://192.168.178.50:7878
+        - name: apiKey
+          value: de578bf28c6d4a479116c4aebb7c4c1e
+    - name: Lidarr
+      syncLevel: addOnly
+      implementation: Lidarr
+      configContract: LidarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.50:9696
+        - name: baseUrl
+          value: http://192.168.178.50:8686
+        - name: apiKey
+          value: 059ab76b96924c31bd1ab758c48f9122
+    - name: Readarr
+      syncLevel: addOnly
+      implementation: Readarr
+      configContract: ReadarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.50:9696
+        - name: baseUrl
+          value: http://192.168.178.50:8787
+        - name: apiKey
+          value: 9f5c7caac82e4f58896b5c295f3ae719

@@ -34,5 +34,9 @@ UNWANTED_CFG_FIELDS = [
     "infoLink",
     "hint",
     "selectOptions",
-    "order"
+    "order",
+    "description",
+    "capabilities",
+    "added",
+    "id",
 ]
