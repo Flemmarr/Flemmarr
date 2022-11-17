@@ -8,6 +8,51 @@ sonarr:
     ui:
       firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
       timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+    naming:
+      renameEpisodes: true
+      replaceIllegalCharacters: true
+      multiEpisodeStyle: 5
+      # https://trash-guides.info/Sonarr/Sonarr-recommended-naming-scheme/
+      standardEpisodeFormat: "{Series TitleYear} - S{season:00}E{episode:00} - {Episode
+        CleanTitle} [{Preferred Words }{Quality Full}]{[MediaInfo VideoDynamicRangeType]}{[Mediainfo
+        AudioCodec}{ Mediainfo AudioChannels]}{MediaInfo AudioLanguages}{[MediaInfo VideoCodec]}{-Release
+        Group}"
+      dailyEpisodeFormat: "{Series TitleYear} - {Air-Date} - {Episode CleanTitle} [{Preferred
+        Words }{Quality Full}]{[MediaInfo VideoDynamicRangeType]}{[Mediainfo AudioCodec}{
+        Mediainfo AudioChannels]}{MediaInfo AudioLanguages}{[MediaInfo VideoCodec]}{-Release
+        Group}"
+      animeEpisodeFormat: "{Series TitleYear} - S{season:00}E{episode:00} - {absolute:000}
+        - {Episode CleanTitle} [{Preferred Words }{Quality Full}]{[MediaInfo VideoDynamicRangeType]}[{MediaInfo
+        VideoBitDepth}bit]{[MediaInfo VideoCodec]}[{Mediainfo AudioCodec} { Mediainfo AudioChannels}]{MediaInfo
+        AudioLanguages}{-Release Group}"
+      seriesFolderFormat: "{Series TitleYear} [imdb-{ImdbId}]"
+      seasonFolderFormat: Season {season:00}
+      specialsFolderFormat: Specials
+      includeSeriesTitle: false
+      includeEpisodeTitle: false
+      includeQuality: false
+      replaceSpaces: true
+      separator: " - " # TODO
+      numberStyle: S{season:00}E{episode:00}
+    mediamanagement:
+      autoUnmonitorPreviouslyDownloadedEpisodes: false
+      recycleBin: ''
+      recycleBinCleanupDays: 7
+      downloadPropersAndRepacks: doNotUpgrade
+      createEmptySeriesFolders: false
+      deleteEmptyFolders: false
+      fileDate: none
+      rescanAfterRefresh: always
+      setPermissionsLinux: false
+      chmodFolder: '755'
+      chownGroup: ''
+      episodeTitleRequired: always
+      skipFreeSpaceCheckWhenImporting: true
+      minimumFreeSpaceWhenImporting: 100
+      copyUsingHardlinks: true
+      importExtraFiles: true
+      extraFileExtensions: srt
+      enableMediaInfo: true
   rootfolder:
     - name: Series
       path: /data/series
@@ -18,6 +63,7 @@ sonarr:
     - name: Transmission
       enable: true
       protocol: torrent
+      priority: 1
       fields:
         - name: host
           value: transmission
@@ -25,6 +71,35 @@ sonarr:
           value: 9091
       implementation: Transmission
       configContract: TransmissionSettings
+    - name: qBittorrent
+      enable: true
+      protocol: torrent
+      priority: 2
+      removeCompletedDownloads: true
+      removeFailedDownloads: true
+      fields:
+      - name: host
+        value: qbittorrent
+      - name: port
+        value: 8080
+      - name: username
+        value: username
+      - name: password
+        value: password
+      - name: tvCategory
+        value: tv
+      - name: recentTvPriority
+        value: 0
+      - name: olderTvPriority
+        value: 0
+      - name: initialState
+        value: 0
+      - name: sequentialOrder
+        value: false
+      - name: firstAndLast
+        value: false
+      implementation: QBittorrent
+      configContract: QBittorrentSettings
 radarr:
   server:
     address: radarr
@@ -36,6 +111,35 @@ radarr:
       firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
       timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
       uiLanguage: 2 # 1 = English, 2 = French, 3 = Spanish...
+    naming:
+      renameMovies: true
+      replaceIllegalCharacters: true
+      colonReplacementFormat: spaceDashSpace
+      # https://trash-guides.info/Radarr/Radarr-recommended-naming-scheme/
+      standardMovieFormat: "{Movie CleanTitle} {(Release Year)} {imdb-{ImdbId}} {edition-{Edition Tags}} {[Custom Formats]}{[Quality Full]}{[MediaInfo 3D]}{[MediaInfo VideoDynamicRangeType]}{[Mediainfo AudioCodec}{ Mediainfo AudioChannels}][{Mediainfo VideoCodec}]{-Release Group}"
+      movieFolderFormat: "{Movie CleanTitle} ({Release Year})"
+      includeQuality: false
+      replaceSpaces: false
+    mediamanagement:
+      autoUnmonitorPreviouslyDownloadedMovies: true
+      recycleBin: ''
+      recycleBinCleanupDays: 7
+      downloadPropersAndRepacks: doNotUpgrade
+      createEmptyMovieFolders: false
+      deleteEmptyFolders: false
+      fileDate: none
+      rescanAfterRefresh: always
+      autoRenameFolders: false
+      pathsDefaultStatic: false
+      setPermissionsLinux: false
+      chmodFolder: '755'
+      chownGroup: ''
+      skipFreeSpaceCheckWhenImporting: true
+      minimumFreeSpaceWhenImporting: 100
+      copyUsingHardlinks: true
+      importExtraFiles: true
+      extraFileExtensions: srt
+      enableMediaInfo: true
   rootfolder:
     - name: Movies
       path: /data/movies
@@ -46,6 +150,7 @@ radarr:
     - name: Transmission
       enable: true
       protocol: torrent
+      priority: 1
       fields:
         - name: host
           value: transmission
@@ -53,6 +158,35 @@ radarr:
           value: 9091
       implementation: Transmission
       configContract: TransmissionSettings
+    - name: qBittorrent
+      enable: true
+      protocol: torrent
+      priority: 2
+      removeCompletedDownloads: true
+      removeFailedDownloads: true
+      fields:
+      - name: host
+        value: qbittorrent
+      - name: port
+        value: 8080
+      - name: username
+        value: username
+      - name: password
+        value: password
+      - name: movieCategory
+        value: movies
+      - name: recentMoviePriority
+        value: 0
+      - name: olderMoviePriority
+        value: 0
+      - name: initialState
+        value: 0
+      - name: sequentialOrder
+        value: false
+      - name: firstAndLast
+        value: false
+      implementation: QBittorrent
+      configContract: QBittorrentSettings
 lidarr:
   server:
     address: lidarr
@@ -135,6 +269,58 @@ prowlarr:
           value: 2
         - name: type
           value: 1
+      tags: []
+    - name: 1337x
+      enable: true
+      appProfileId: 1
+      definitionName: 1337x
+      implementation: Cardigann
+      configContract: CardigannSettings
+      fields:
+        - name: definitionFile
+          value: 1337x
+        - name: downloadlink
+          value: 0 # iTorrents.org
+        - name: downloadlink2
+          value: 1 # magnet
+        - name: sort
+          value: 0 # seeders
+        - name: type
+          value: 1 # desc
+      tags: []
+    - name: EZTV
+      enable: true
+      appProfileId: 1
+      definitionName: eztv
+      implementation: Cardigann
+      configContract: CardigannSettings
+      fields:
+        - name: definitionFile
+          value: eztv
+      tags: []
+    - name: TorrentGalaxy
+      enable: true
+      appProfileId: 1
+      definitionName: torrentgalaxy
+      implementation: Cardigann
+      configContract: CardigannSettings
+      fields:
+        - name: definitionFile
+          value: torrentgalaxy
+        - name: sort
+          value: 2 # seeders
+        - name: type
+          value: 1 # desc
+      tags: []
+    - name: Rarbg
+      enable: false # currently not returning results, issue is with Rarbg and not prowlarr
+      appProfileId: 1
+      definitionName: Rarbg
+      implementation: Rarbg
+      configContract: RarbgSettings
+      fields:
+        - name: rankedOnly
+          value: false
       tags: []
   applications:
     - name: Sonarr
