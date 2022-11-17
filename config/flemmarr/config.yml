@@ -32,7 +32,7 @@ sonarr:
       includeEpisodeTitle: false
       includeQuality: false
       replaceSpaces: true
-      separator: " - " # TODO
+      separator: " - "
       numberStyle: S{season:00}E{episode:00}
     mediamanagement:
       autoUnmonitorPreviouslyDownloadedEpisodes: false
