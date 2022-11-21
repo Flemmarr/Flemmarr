@@ -1,0 +1,4863 @@
+lidarr:
+  config:
+    ui:
+      calendarWeekColumnHeader: ddd M/D
+      enableColorImpairedMode: false
+      expandAlbumByDefault: false
+      expandBroadcastByDefault: false
+      expandEPByDefault: false
+      expandOtherByDefault: false
+      expandSingleByDefault: false
+      firstDayOfWeek: 1
+      longDateFormat: dddd, MMMM D YYYY
+      shortDateFormat: MMM D YYYY
+      showRelativeDates: true
+      timeFormat: HH:mm
+      uiLanguage: 2
+  customfilter: []
+  delayprofile:
+  - enableTorrent: true
+    enableUsenet: true
+    preferredProtocol: usenet
+    tags: []
+    torrentDelay: 0
+    usenetDelay: 0
+  downloadclient: []
+  importlist: []
+  importlistexclusion: []
+  indexer: []
+  metadata:
+  - configContract: XbmcMetadataSettings
+    enable: false
+    fields:
+    - name: artistMetadata
+      section: metadata
+      value: true
+    - name: albumMetadata
+      section: metadata
+      value: true
+    - name: artistImages
+      section: image
+      value: true
+    - name: albumImages
+      section: image
+      value: true
+    implementation: XbmcMetadata
+    implementationName: Kodi (XBMC) / Emby
+    name: Kodi (XBMC) / Emby
+    tags: []
+  - configContract: RoksboxMetadataSettings
+    enable: false
+    fields:
+    - name: trackMetadata
+      section: metadata
+      value: true
+    - name: artistImages
+      section: image
+      value: true
+    - name: albumImages
+      section: image
+      value: true
+    implementation: RoksboxMetadata
+    implementationName: Roksbox
+    name: Roksbox
+    tags: []
+  - configContract: WdtvMetadataSettings
+    enable: false
+    fields:
+    - name: trackMetadata
+      section: metadata
+      value: true
+    implementation: WdtvMetadata
+    implementationName: WDTV
+    name: WDTV
+    tags: []
+  metadataprofile:
+  - name: Standard
+    primaryAlbumTypes:
+    - albumType:
+      name: Single
+      allowed: false
+    - albumType:
+      name: Other
+      allowed: false
+    - albumType:
+      name: EP
+      allowed: false
+    - albumType:
+      name: Broadcast
+      allowed: false
+    - albumType:
+      name: Album
+      allowed: true
+    releaseStatuses:
+    - allowed: false
+      releaseStatus:
+         3
+        name: Pseudo-Release
+    - allowed: false
+      releaseStatus:
+         1
+        name: Promotion
+    - allowed: true
+      releaseStatus:
+         0
+        name: Official
+    - allowed: false
+      releaseStatus:
+         2
+        name: Bootleg
+    secondaryAlbumTypes:
+    - albumType:
+         0
+        name: Studio
+      allowed: true
+    - albumType:
+         3
+        name: Spokenword
+      allowed: false
+    - albumType:
+         2
+        name: Soundtrack
+      allowed: false
+    - albumType:
+         7
+        name: Remix
+      allowed: false
+    - albumType:
+         9
+        name: Mixtape/Street
+      allowed: false
+    - albumType:
+         6
+        name: Live
+      allowed: false
+    - albumType:
+         4
+        name: Interview
+      allowed: false
+    - albumType:
+         8
+        name: DJ-mix
+      allowed: false
+    - albumType:
+         10
+        name: Demo
+      allowed: false
+    - albumType:
+         1
+        name: Compilation
+      allowed: false
+  -  2
+    name: None
+    primaryAlbumTypes:
+    - albumType:
+         2
+        name: Single
+      allowed: false
+    - albumType:
+         4
+        name: Other
+      allowed: false
+    - albumType:
+         1
+        name: EP
+      allowed: false
+    - albumType:
+         3
+        name: Broadcast
+      allowed: false
+    - albumType:
+         0
+        name: Album
+      allowed: false
+    releaseStatuses:
+    - allowed: false
+      releaseStatus:
+         3
+        name: Pseudo-Release
+    - allowed: false
+      releaseStatus:
+         1
+        name: Promotion
+    - allowed: false
+      releaseStatus:
+         0
+        name: Official
+    - allowed: false
+      releaseStatus:
+         2
+        name: Bootleg
+    secondaryAlbumTypes:
+    - albumType:
+         0
+        name: Studio
+      allowed: false
+    - albumType:
+         3
+        name: Spokenword
+      allowed: false
+    - albumType:
+         2
+        name: Soundtrack
+      allowed: false
+    - albumType:
+         7
+        name: Remix
+      allowed: false
+    - albumType:
+         9
+        name: Mixtape/Street
+      allowed: false
+    - albumType:
+         6
+        name: Live
+      allowed: false
+    - albumType:
+         4
+        name: Interview
+      allowed: false
+    - albumType:
+         8
+        name: DJ-mix
+      allowed: false
+    - albumType:
+         10
+        name: Demo
+      allowed: false
+    - albumType:
+         1
+        name: Compilation
+      allowed: false
+  notification: []
+  qualitydefinition:
+  -  1
+    maxSize: 350
+    minSize: 0
+    quality:
+       0
+      name: Unknown
+    title: Unknown
+    weight: 1
+  -  2
+    maxSize: 10
+    minSize: 0
+    quality:
+       32
+      name: MP3-8
+    title: MP3-8
+    weight: 2
+  -  3
+    maxSize: 20
+    minSize: 0
+    quality:
+       31
+      name: MP3-16
+    title: MP3-16
+    weight: 3
+  -  4
+    maxSize: 30
+    minSize: 0
+    quality:
+       30
+      name: MP3-24
+    title: MP3-24
+    weight: 4
+  -  5
+    maxSize: 40
+    minSize: 0
+    quality:
+       29
+      name: MP3-32
+    title: MP3-32
+    weight: 5
+  -  6
+    maxSize: 45
+    minSize: 0
+    quality:
+       28
+      name: MP3-40
+    title: MP3-40
+    weight: 6
+  -  7
+    maxSize: 55
+    minSize: 0
+    quality:
+       27
+      name: MP3-48
+    title: MP3-48
+    weight: 7
+  -  8
+    maxSize: 65
+    minSize: 0
+    quality:
+       26
+      name: MP3-56
+    title: MP3-56
+    weight: 8
+  -  9
+    maxSize: 75
+    minSize: 0
+    quality:
+       25
+      name: MP3-64
+    title: MP3-64
+    weight: 9
+  -  10
+    maxSize: 95
+    minSize: 0
+    quality:
+       24
+      name: MP3-80
+    title: MP3-80
+    weight: 10
+  -  11
+    maxSize: 110
+    minSize: 0
+    quality:
+       23
+      name: MP3-96
+    title: MP3-96
+    weight: 11
+  -  12
+    maxSize: 125
+    minSize: 0
+    quality:
+       33
+      name: MP3-112
+    title: MP3-112
+    weight: 12
+  -  13
+    maxSize: 140
+    minSize: 0
+    quality:
+       22
+      name: MP3-128
+    title: MP3-128
+    weight: 13
+  -  14
+    maxSize: 175
+    minSize: 0
+    quality:
+       19
+      name: OGG Vorbis Q5
+    title: OGG Vorbis Q5
+    weight: 14
+  -  15
+    maxSize: 175
+    minSize: 0
+    quality:
+       5
+      name: MP3-160
+    title: MP3-160
+    weight: 14
+  -  16
+    maxSize: 210
+    minSize: 0
+    quality:
+       1
+      name: MP3-192
+    title: MP3-192
+    weight: 15
+  -  17
+    maxSize: 210
+    minSize: 0
+    quality:
+       18
+      name: OGG Vorbis Q6
+    title: OGG Vorbis Q6
+    weight: 15
+  -  18
+    maxSize: 210
+    minSize: 0
+    quality:
+       9
+      name: AAC-192
+    title: AAC-192
+    weight: 15
+  -  19
+    maxSize: 350
+    minSize: 0
+    quality:
+       20
+      name: WMA
+    title: WMA
+    weight: 15
+  -  20
+    maxSize: 245
+    minSize: 0
+    quality:
+       34
+      name: MP3-224
+    title: MP3-224
+    weight: 16
+  -  21
+    maxSize: 245
+    minSize: 0
+    quality:
+       17
+      name: OGG Vorbis Q7
+    title: OGG Vorbis Q7
+    weight: 17
+  -  22
+    maxSize: 280
+    minSize: 0
+    quality:
+       8
+      name: MP3-VBR-V2
+    title: MP3-VBR-V2
+    weight: 18
+  -  23
+    maxSize: 280
+    minSize: 0
+    quality:
+       3
+      name: MP3-256
+    title: MP3-256
+    weight: 18
+  -  24
+    maxSize: 280
+    minSize: 0
+    quality:
+       16
+      name: OGG Vorbis Q8
+    title: OGG Vorbis Q8
+    weight: 18
+  -  25
+    maxSize: 280
+    minSize: 0
+    quality:
+       10
+      name: AAC-256
+    title: AAC-256
+    weight: 18
+  -  26
+    maxSize: 350
+    minSize: 0
+    quality:
+       2
+      name: MP3-VBR-V0
+    title: MP3-VBR-V0
+    weight: 19
+  -  27
+    maxSize: 350
+    minSize: 0
+    quality:
+       12
+      name: AAC-VBR
+    title: AAC-VBR
+    weight: 19
+  -  28
+    maxSize: 350
+    minSize: 0
+    quality:
+       4
+      name: MP3-320
+    title: MP3-320
+    weight: 20
+  -  29
+    maxSize: 350
+    minSize: 0
+    quality:
+       15
+      name: OGG Vorbis Q9
+    title: OGG Vorbis Q9
+    weight: 20
+  -  30
+    maxSize: 350
+    minSize: 0
+    quality:
+       11
+      name: AAC-320
+    title: AAC-320
+    weight: 20
+  -  31
+    maxSize: 550
+    minSize: 0
+    quality:
+       14
+      name: OGG Vorbis Q10
+    title: OGG Vorbis Q10
+    weight: 21
+  -  32
+    minSize: 0
+    quality:
+       7
+      name: ALAC
+    title: ALAC
+    weight: 22
+  -  33
+    minSize: 0
+    quality:
+       6
+      name: FLAC
+    title: FLAC
+    weight: 22
+  -  34
+    minSize: 0
+    quality:
+       35
+      name: APE
+    title: APE
+    weight: 22
+  -  35
+    minSize: 0
+    quality:
+       36
+      name: WavPack
+    title: WavPack
+    weight: 22
+  -  36
+    minSize: 0
+    quality:
+       21
+      name: FLAC 24bit
+    title: FLAC 24bit
+    weight: 23
+  -  37
+    minSize: 0
+    quality:
+       13
+      name: WAV
+    title: WAV
+    weight: 24
+  qualityprofile:
+  - cutoff: 0
+     1
+    items:
+    - allowed: true
+      items: []
+      quality:
+         0
+        name: Unknown
+    - allowed: true
+       1000
+      items:
+      - allowed: true
+        items: []
+        quality:
+           32
+          name: MP3-8
+      - allowed: true
+        items: []
+        quality:
+           31
+          name: MP3-16
+      - allowed: true
+        items: []
+        quality:
+           30
+          name: MP3-24
+      - allowed: true
+        items: []
+        quality:
+           29
+          name: MP3-32
+      - allowed: true
+        items: []
+        quality:
+           28
+          name: MP3-40
+      - allowed: true
+        items: []
+        quality:
+           27
+          name: MP3-48
+      - allowed: true
+        items: []
+        quality:
+           26
+          name: MP3-56
+      - allowed: true
+        items: []
+        quality:
+           25
+          name: MP3-64
+      - allowed: true
+        items: []
+        quality:
+           24
+          name: MP3-80
+      name: Trash Quality Lossy
+    - allowed: true
+       1001
+      items:
+      - allowed: true
+        items: []
+        quality:
+           23
+          name: MP3-96
+      - allowed: true
+        items: []
+        quality:
+           33
+          name: MP3-112
+      - allowed: true
+        items: []
+        quality:
+           22
+          name: MP3-128
+      - allowed: true
+        items: []
+        quality:
+           19
+          name: OGG Vorbis Q5
+      - allowed: true
+        items: []
+        quality:
+           5
+          name: MP3-160
+      name: Poor Quality Lossy
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           1
+          name: MP3-192
+      - allowed: true
+        items: []
+        quality:
+           18
+          name: OGG Vorbis Q6
+      - allowed: true
+        items: []
+        quality:
+           9
+          name: AAC-192
+      - allowed: true
+        items: []
+        quality:
+           20
+          name: WMA
+      - allowed: true
+        items: []
+        quality:
+           34
+          name: MP3-224
+      name: Low Quality Lossy
+    - allowed: true
+       1003
+      items:
+      - allowed: true
+        items: []
+        quality:
+           17
+          name: OGG Vorbis Q7
+      - allowed: true
+        items: []
+        quality:
+           8
+          name: MP3-VBR-V2
+      - allowed: true
+        items: []
+        quality:
+           3
+          name: MP3-256
+      - allowed: true
+        items: []
+        quality:
+           16
+          name: OGG Vorbis Q8
+      - allowed: true
+        items: []
+        quality:
+           10
+          name: AAC-256
+      name: Mid Quality Lossy
+    - allowed: true
+       1004
+      items:
+      - allowed: true
+        items: []
+        quality:
+           2
+          name: MP3-VBR-V0
+      - allowed: true
+        items: []
+        quality:
+           12
+          name: AAC-VBR
+      - allowed: true
+        items: []
+        quality:
+           4
+          name: MP3-320
+      - allowed: true
+        items: []
+        quality:
+           15
+          name: OGG Vorbis Q9
+      - allowed: true
+        items: []
+        quality:
+           11
+          name: AAC-320
+      - allowed: true
+        items: []
+        quality:
+           14
+          name: OGG Vorbis Q10
+      name: High Quality Lossy
+    - allowed: true
+       1005
+      items:
+      - allowed: true
+        items: []
+        quality:
+           7
+          name: ALAC
+      - allowed: true
+        items: []
+        quality:
+           6
+          name: FLAC
+      - allowed: true
+        items: []
+        quality:
+           35
+          name: APE
+      - allowed: true
+        items: []
+        quality:
+           36
+          name: WavPack
+      - allowed: true
+        items: []
+        quality:
+           21
+          name: FLAC 24bit
+      name: Lossless
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: WAV
+    name: Any
+    upgradeAllowed: false
+  - cutoff: 1005
+     2
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           32
+          name: MP3-8
+      - allowed: false
+        items: []
+        quality:
+           31
+          name: MP3-16
+      - allowed: false
+        items: []
+        quality:
+           30
+          name: MP3-24
+      - allowed: false
+        items: []
+        quality:
+           29
+          name: MP3-32
+      - allowed: false
+        items: []
+        quality:
+           28
+          name: MP3-40
+      - allowed: false
+        items: []
+        quality:
+           27
+          name: MP3-48
+      - allowed: false
+        items: []
+        quality:
+           26
+          name: MP3-56
+      - allowed: false
+        items: []
+        quality:
+           25
+          name: MP3-64
+      - allowed: false
+        items: []
+        quality:
+           24
+          name: MP3-80
+      name: Trash Quality Lossy
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           23
+          name: MP3-96
+      - allowed: false
+        items: []
+        quality:
+           33
+          name: MP3-112
+      - allowed: false
+        items: []
+        quality:
+           22
+          name: MP3-128
+      - allowed: false
+        items: []
+        quality:
+           19
+          name: OGG Vorbis Q5
+      - allowed: false
+        items: []
+        quality:
+           5
+          name: MP3-160
+      name: Poor Quality Lossy
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           1
+          name: MP3-192
+      - allowed: false
+        items: []
+        quality:
+           18
+          name: OGG Vorbis Q6
+      - allowed: false
+        items: []
+        quality:
+           9
+          name: AAC-192
+      - allowed: false
+        items: []
+        quality:
+           20
+          name: WMA
+      - allowed: false
+        items: []
+        quality:
+           34
+          name: MP3-224
+      name: Low Quality Lossy
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           17
+          name: OGG Vorbis Q7
+      - allowed: false
+        items: []
+        quality:
+           8
+          name: MP3-VBR-V2
+      - allowed: false
+        items: []
+        quality:
+           3
+          name: MP3-256
+      - allowed: false
+        items: []
+        quality:
+           16
+          name: OGG Vorbis Q8
+      - allowed: false
+        items: []
+        quality:
+           10
+          name: AAC-256
+      name: Mid Quality Lossy
+    - allowed: false
+       1004
+      items:
+      - allowed: false
+        items: []
+        quality:
+           2
+          name: MP3-VBR-V0
+      - allowed: false
+        items: []
+        quality:
+           12
+          name: AAC-VBR
+      - allowed: false
+        items: []
+        quality:
+           4
+          name: MP3-320
+      - allowed: false
+        items: []
+        quality:
+           15
+          name: OGG Vorbis Q9
+      - allowed: false
+        items: []
+        quality:
+           11
+          name: AAC-320
+      - allowed: false
+        items: []
+        quality:
+           14
+          name: OGG Vorbis Q10
+      name: High Quality Lossy
+    - allowed: true
+       1005
+      items:
+      - allowed: true
+        items: []
+        quality:
+           7
+          name: ALAC
+      - allowed: true
+        items: []
+        quality:
+           6
+          name: FLAC
+      - allowed: true
+        items: []
+        quality:
+           35
+          name: APE
+      - allowed: true
+        items: []
+        quality:
+           36
+          name: WavPack
+      - allowed: true
+        items: []
+        quality:
+           21
+          name: FLAC 24bit
+      name: Lossless
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: WAV
+    name: Lossless
+    upgradeAllowed: false
+  - cutoff: 1002
+     3
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           32
+          name: MP3-8
+      - allowed: false
+        items: []
+        quality:
+           31
+          name: MP3-16
+      - allowed: false
+        items: []
+        quality:
+           30
+          name: MP3-24
+      - allowed: false
+        items: []
+        quality:
+           29
+          name: MP3-32
+      - allowed: false
+        items: []
+        quality:
+           28
+          name: MP3-40
+      - allowed: false
+        items: []
+        quality:
+           27
+          name: MP3-48
+      - allowed: false
+        items: []
+        quality:
+           26
+          name: MP3-56
+      - allowed: false
+        items: []
+        quality:
+           25
+          name: MP3-64
+      - allowed: false
+        items: []
+        quality:
+           24
+          name: MP3-80
+      name: Trash Quality Lossy
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           23
+          name: MP3-96
+      - allowed: false
+        items: []
+        quality:
+           33
+          name: MP3-112
+      - allowed: false
+        items: []
+        quality:
+           22
+          name: MP3-128
+      - allowed: false
+        items: []
+        quality:
+           19
+          name: OGG Vorbis Q5
+      - allowed: false
+        items: []
+        quality:
+           5
+          name: MP3-160
+      name: Poor Quality Lossy
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           1
+          name: MP3-192
+      - allowed: true
+        items: []
+        quality:
+           18
+          name: OGG Vorbis Q6
+      - allowed: true
+        items: []
+        quality:
+           9
+          name: AAC-192
+      - allowed: true
+        items: []
+        quality:
+           20
+          name: WMA
+      - allowed: true
+        items: []
+        quality:
+           34
+          name: MP3-224
+      name: Low Quality Lossy
+    - allowed: true
+       1003
+      items:
+      - allowed: true
+        items: []
+        quality:
+           17
+          name: OGG Vorbis Q7
+      - allowed: true
+        items: []
+        quality:
+           8
+          name: MP3-VBR-V2
+      - allowed: true
+        items: []
+        quality:
+           3
+          name: MP3-256
+      - allowed: true
+        items: []
+        quality:
+           16
+          name: OGG Vorbis Q8
+      - allowed: true
+        items: []
+        quality:
+           10
+          name: AAC-256
+      name: Mid Quality Lossy
+    - allowed: true
+       1004
+      items:
+      - allowed: true
+        items: []
+        quality:
+           2
+          name: MP3-VBR-V0
+      - allowed: true
+        items: []
+        quality:
+           12
+          name: AAC-VBR
+      - allowed: true
+        items: []
+        quality:
+           4
+          name: MP3-320
+      - allowed: true
+        items: []
+        quality:
+           15
+          name: OGG Vorbis Q9
+      - allowed: true
+        items: []
+        quality:
+           11
+          name: AAC-320
+      - allowed: true
+        items: []
+        quality:
+           14
+          name: OGG Vorbis Q10
+      name: High Quality Lossy
+    - allowed: false
+       1005
+      items:
+      - allowed: false
+        items: []
+        quality:
+           7
+          name: ALAC
+      - allowed: false
+        items: []
+        quality:
+           6
+          name: FLAC
+      - allowed: false
+        items: []
+        quality:
+           35
+          name: APE
+      - allowed: false
+        items: []
+        quality:
+           36
+          name: WavPack
+      - allowed: false
+        items: []
+        quality:
+           21
+          name: FLAC 24bit
+      name: Lossless
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: WAV
+    name: Standard
+    upgradeAllowed: false
+  releaseprofile: []
+  remotepathmapping: []
+  rootfolder: []
+  tag:
+    detail: []
+prowlarr:
+  applications: []
+  appprofile:
+  - enableAutomaticSearch: true
+    enableInteractiveSearch: true
+    enableRss: true
+     1
+    minimumSeeders: 1
+    name: Standard
+  config:
+    ui:
+      calendarWeekColumnHeader: ddd M/D
+      enableColorImpairedMode: false
+      firstDayOfWeek: 0
+       1
+      longDateFormat: dddd, MMMM D YYYY
+      shortDateFormat: MMM D YYYY
+      showRelativeDates: true
+      theme: light
+      timeFormat: h(:mm)a
+      uiLanguage: en
+  customfilter: []
+  downloadclient: []
+  indexer: []
+  indexerproxy: []
+  notification: []
+  tag:
+    detail: []
+radarr:
+  config:
+    ui:
+      calendarWeekColumnHeader: ddd M/D
+      enableColorImpairedMode: false
+      firstDayOfWeek: 0
+       1
+      longDateFormat: dddd, MMMM D YYYY
+      movieInfoLanguage: 1
+      movieRuntimeFormat: hoursMinutes
+      shortDateFormat: MMM D YYYY
+      showRelativeDates: true
+      timeFormat: h(:mm)a
+      uiLanguage: 1
+  customfilter: []
+  customformat: []
+  delayprofile:
+  - bypassIfHighestQuality: true
+    enableTorrent: true
+    enableUsenet: true
+     1
+    preferredProtocol: usenet
+    tags: []
+    torrentDelay: 0
+    usenetDelay: 0
+  downloadclient: []
+  exclusions: []
+  indexer: []
+  metadata:
+  - configContract: MediaBrowserMetadataSettings
+    enable: false
+    fields:
+    - name: movieMetadata
+      value: true
+     4
+    implementation: MediaBrowserMetadata
+    implementationName: Emby (Legacy)
+    name: Emby (Legacy)
+    tags: []
+  - configContract: XbmcMetadataSettings
+    enable: false
+    fields:
+    - name: movieMetadata
+      value: true
+    - name: movieMetadataURL
+      value: false
+    - name: movieMetadataLanguage
+      value: 1
+    - name: movieImages
+      value: true
+    - name: useMovieNfo
+      value: false
+    - name: addCollectionName
+      value: true
+     1
+    implementation: XbmcMetadata
+    implementationName: Kodi (XBMC) / Emby
+    name: Kodi (XBMC) / Emby
+    tags: []
+  - configContract: RoksboxMetadataSettings
+    enable: false
+    fields:
+    - name: movieMetadata
+      value: true
+    - name: movieImages
+      value: true
+     3
+    implementation: RoksboxMetadata
+    implementationName: Roksbox
+    name: Roksbox
+    tags: []
+  - configContract: WdtvMetadataSettings
+    enable: false
+    fields:
+    - name: movieMetadata
+      value: true
+    - name: movieImages
+      value: true
+     2
+    implementation: WdtvMetadata
+    implementationName: WDTV
+    name: WDTV
+    tags: []
+  notification: []
+  qualitydefinition:
+  -  1
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       0
+      modifier: none
+      name: Unknown
+      resolution: 0
+      source: unknown
+    title: Unknown
+    weight: 1
+  -  2
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       24
+      modifier: none
+      name: WORKPRINT
+      resolution: 0
+      source: workprint
+    title: WORKPRINT
+    weight: 2
+  -  3
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       25
+      modifier: none
+      name: CAM
+      resolution: 0
+      source: cam
+    title: CAM
+    weight: 3
+  -  4
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       26
+      modifier: none
+      name: TELESYNC
+      resolution: 0
+      source: telesync
+    title: TELESYNC
+    weight: 4
+  -  5
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       27
+      modifier: none
+      name: TELECINE
+      resolution: 0
+      source: telecine
+    title: TELECINE
+    weight: 5
+  -  6
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       29
+      modifier: regional
+      name: REGIONAL
+      resolution: 480
+      source: dvd
+    title: REGIONAL
+    weight: 6
+  -  7
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       28
+      modifier: screener
+      name: DVDSCR
+      resolution: 480
+      source: dvd
+    title: DVDSCR
+    weight: 7
+  -  8
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       1
+      modifier: none
+      name: SDTV
+      resolution: 480
+      source: tv
+    title: SDTV
+    weight: 8
+  -  9
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       2
+      modifier: none
+      name: DVD
+      resolution: 480
+      source: dvd
+    title: DVD
+    weight: 9
+  -  10
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       23
+      modifier: remux
+      name: DVD-R
+      resolution: 480
+      source: dvd
+    title: DVD-R
+    weight: 10
+  -  11
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       8
+      modifier: none
+      name: WEBDL-480p
+      resolution: 480
+      source: webdl
+    title: WEBDL-480p
+    weight: 11
+  -  12
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       12
+      modifier: none
+      name: WEBRip-480p
+      resolution: 480
+      source: webrip
+    title: WEBRip-480p
+    weight: 11
+  -  13
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       20
+      modifier: none
+      name: Bluray-480p
+      resolution: 480
+      source: bluray
+    title: Bluray-480p
+    weight: 12
+  -  14
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       21
+      modifier: none
+      name: Bluray-576p
+      resolution: 576
+      source: bluray
+    title: Bluray-576p
+    weight: 13
+  -  15
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       4
+      modifier: none
+      name: HDTV-720p
+      resolution: 720
+      source: tv
+    title: HDTV-720p
+    weight: 14
+  -  16
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       5
+      modifier: none
+      name: WEBDL-720p
+      resolution: 720
+      source: webdl
+    title: WEBDL-720p
+    weight: 15
+  -  17
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       14
+      modifier: none
+      name: WEBRip-720p
+      resolution: 720
+      source: webrip
+    title: WEBRip-720p
+    weight: 15
+  -  18
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       6
+      modifier: none
+      name: Bluray-720p
+      resolution: 720
+      source: bluray
+    title: Bluray-720p
+    weight: 16
+  -  19
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       9
+      modifier: none
+      name: HDTV-1080p
+      resolution: 1080
+      source: tv
+    title: HDTV-1080p
+    weight: 17
+  -  20
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       3
+      modifier: none
+      name: WEBDL-1080p
+      resolution: 1080
+      source: webdl
+    title: WEBDL-1080p
+    weight: 18
+  -  21
+    maxSize: 100
+    minSize: 0
+    preferredSize: 95
+    quality:
+       15
+      modifier: none
+      name: WEBRip-1080p
+      resolution: 1080
+      source: webrip
+    title: WEBRip-1080p
+    weight: 18
+  -  22
+    minSize: 0
+    quality:
+       7
+      modifier: none
+      name: Bluray-1080p
+      resolution: 1080
+      source: bluray
+    title: Bluray-1080p
+    weight: 19
+  -  23
+    minSize: 0
+    quality:
+       30
+      modifier: remux
+      name: Remux-1080p
+      resolution: 1080
+      source: bluray
+    title: Remux-1080p
+    weight: 20
+  -  24
+    minSize: 0
+    quality:
+       16
+      modifier: none
+      name: HDTV-2160p
+      resolution: 2160
+      source: tv
+    title: HDTV-2160p
+    weight: 21
+  -  25
+    minSize: 0
+    quality:
+       18
+      modifier: none
+      name: WEBDL-2160p
+      resolution: 2160
+      source: webdl
+    title: WEBDL-2160p
+    weight: 22
+  -  26
+    minSize: 0
+    quality:
+       17
+      modifier: none
+      name: WEBRip-2160p
+      resolution: 2160
+      source: webrip
+    title: WEBRip-2160p
+    weight: 22
+  -  27
+    minSize: 0
+    quality:
+       19
+      modifier: none
+      name: Bluray-2160p
+      resolution: 2160
+      source: bluray
+    title: Bluray-2160p
+    weight: 23
+  -  28
+    minSize: 0
+    quality:
+       31
+      modifier: remux
+      name: Remux-2160p
+      resolution: 2160
+      source: bluray
+    title: Remux-2160p
+    weight: 24
+  -  29
+    minSize: 0
+    quality:
+       22
+      modifier: brdisk
+      name: BR-DISK
+      resolution: 1080
+      source: bluray
+    title: BR-DISK
+    weight: 25
+  -  30
+    minSize: 0
+    quality:
+       10
+      modifier: rawhd
+      name: Raw-HD
+      resolution: 1080
+      source: tv
+    title: Raw-HD
+    weight: 26
+  qualityprofile:
+  - cutoff: 20
+    cutoffFormatScore: 0
+    formatItems: []
+     1
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: true
+      items: []
+      quality:
+         24
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: true
+      items: []
+      quality:
+         25
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: true
+      items: []
+      quality:
+         26
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: true
+      items: []
+      quality:
+         27
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: true
+      items: []
+      quality:
+         29
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+         28
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+         1
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: true
+      items: []
+      quality:
+         2
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+         23
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: true
+       1000
+      items:
+      - allowed: true
+        items: []
+        quality:
+           8
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           12
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: true
+      items: []
+      quality:
+         20
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         21
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         4
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: true
+       1001
+      items:
+      - allowed: true
+        items: []
+        quality:
+           5
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           14
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: true
+      items: []
+      quality:
+         6
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         9
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           3
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           15
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: true
+      items: []
+      quality:
+         7
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         30
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         16
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: true
+       1003
+      items:
+      - allowed: true
+        items: []
+        quality:
+           18
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           17
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: true
+      items: []
+      quality:
+         19
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         31
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         22
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         10
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+       1
+      name: English
+    minFormatScore: 0
+    name: Any
+    upgradeAllowed: false
+  - cutoff: 20
+    cutoffFormatScore: 0
+    formatItems: []
+     2
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: true
+      items: []
+      quality:
+         24
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: true
+      items: []
+      quality:
+         25
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: true
+      items: []
+      quality:
+         26
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: true
+      items: []
+      quality:
+         27
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: true
+      items: []
+      quality:
+         29
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+         28
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+         1
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: true
+      items: []
+      quality:
+         2
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         23
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: true
+       1000
+      items:
+      - allowed: true
+        items: []
+        quality:
+           8
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           12
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: true
+      items: []
+      quality:
+         20
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         21
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         4
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           5
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           14
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: false
+      items: []
+      quality:
+         6
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         9
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           3
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           15
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: false
+      items: []
+      quality:
+         7
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         30
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         16
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           18
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           17
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         31
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         22
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         10
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+       1
+      name: English
+    minFormatScore: 0
+    name: SD
+    upgradeAllowed: false
+  - cutoff: 6
+    cutoffFormatScore: 0
+    formatItems: []
+     3
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         24
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: false
+      items: []
+      quality:
+         25
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: false
+      items: []
+      quality:
+         26
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: false
+      items: []
+      quality:
+         27
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: false
+      items: []
+      quality:
+         29
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         28
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         1
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: false
+      items: []
+      quality:
+         2
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         23
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           8
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           12
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         20
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         4
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: true
+       1001
+      items:
+      - allowed: true
+        items: []
+        quality:
+           5
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           14
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: true
+      items: []
+      quality:
+         6
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         9
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           3
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           15
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: false
+      items: []
+      quality:
+         7
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         30
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         16
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           18
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           17
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         31
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         22
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         10
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+       1
+      name: English
+    minFormatScore: 0
+    name: HD-720p
+    upgradeAllowed: false
+  - cutoff: 7
+    cutoffFormatScore: 0
+    formatItems: []
+     4
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         24
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: false
+      items: []
+      quality:
+         25
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: false
+      items: []
+      quality:
+         26
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: false
+      items: []
+      quality:
+         27
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: false
+      items: []
+      quality:
+         29
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         28
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         1
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: false
+      items: []
+      quality:
+         2
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         23
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           8
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           12
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         20
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         4
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           5
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           14
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: false
+      items: []
+      quality:
+         6
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         9
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           3
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           15
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: true
+      items: []
+      quality:
+         7
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         30
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         16
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           18
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           17
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         31
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         22
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         10
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+       1
+      name: English
+    minFormatScore: 0
+    name: HD-1080p
+    upgradeAllowed: false
+  - cutoff: 31
+    cutoffFormatScore: 0
+    formatItems: []
+     5
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         24
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: false
+      items: []
+      quality:
+         25
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: false
+      items: []
+      quality:
+         26
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: false
+      items: []
+      quality:
+         27
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: false
+      items: []
+      quality:
+         29
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         28
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         1
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: false
+      items: []
+      quality:
+         2
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         23
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           8
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           12
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         20
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         4
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           5
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           14
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: false
+      items: []
+      quality:
+         6
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         9
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           3
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           15
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: false
+      items: []
+      quality:
+         7
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         30
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         16
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: true
+       1003
+      items:
+      - allowed: true
+        items: []
+        quality:
+           18
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           17
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: true
+      items: []
+      quality:
+         19
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         31
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         22
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         10
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+       1
+      name: English
+    minFormatScore: 0
+    name: Ultra-HD
+    upgradeAllowed: false
+  - cutoff: 6
+    cutoffFormatScore: 0
+    formatItems: []
+     6
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         24
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: false
+      items: []
+      quality:
+         25
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: false
+      items: []
+      quality:
+         26
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: false
+      items: []
+      quality:
+         27
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: false
+      items: []
+      quality:
+         29
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         28
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         1
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: false
+      items: []
+      quality:
+         2
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         23
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           8
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           12
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         20
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         4
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: true
+       1001
+      items:
+      - allowed: true
+        items: []
+        quality:
+           5
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           14
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: true
+      items: []
+      quality:
+         6
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         9
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           3
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+           15
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: true
+      items: []
+      quality:
+         7
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         30
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         16
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           18
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: false
+        items: []
+        quality:
+           17
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         31
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         22
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         10
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+       1
+      name: English
+    minFormatScore: 0
+    name: HD - 720p/1080p
+    upgradeAllowed: false
+  remotepathmapping: []
+  restriction: []
+  rootfolder: []
+  tag:
+    detail: []
+readarr:
+  config:
+    ui:
+      calendarWeekColumnHeader: ddd M/D
+      enableColorImpairedMode: false
+      firstDayOfWeek: 0
+       1
+      longDateFormat: dddd, MMMM D YYYY
+      shortDateFormat: MMM D YYYY
+      showRelativeDates: true
+      timeFormat: h(:mm)a
+      uiLanguage: 1
+  customfilter: []
+  delayprofile:
+  - enableTorrent: true
+    enableUsenet: true
+     1
+    preferredProtocol: usenet
+    tags: []
+    torrentDelay: 0
+    usenetDelay: 0
+  downloadclient: []
+  indexer: []
+  metadata: []
+  metadataprofile:
+  - allowedLanguages: eng, null
+     1
+    minPages: 0
+    minPopularity: 350
+    name: Standard
+    skipMissingDate: true
+    skipMissingIsbn: false
+    skipPartsAndSets: true
+    skipSeriesSecondary: false
+  -  2
+    minPages: 0
+    minPopularity: 10000000000
+    name: None
+    skipMissingDate: false
+    skipMissingIsbn: false
+    skipPartsAndSets: false
+    skipSeriesSecondary: false
+  notification: []
+  qualitydefinition:
+  -  1
+    maxSize: 350
+    minSize: 0
+    quality:
+       0
+      name: Unknown Text
+    title: Unknown Text
+    weight: 1
+  -  2
+    maxSize: 350
+    minSize: 0
+    quality:
+       1
+      name: PDF
+    title: PDF
+    weight: 5
+  -  3
+    maxSize: 350
+    minSize: 0
+    quality:
+       2
+      name: MOBI
+    title: MOBI
+    weight: 10
+  -  4
+    maxSize: 350
+    minSize: 0
+    quality:
+       3
+      name: EPUB
+    title: EPUB
+    weight: 11
+  -  5
+    maxSize: 350
+    minSize: 0
+    quality:
+       4
+      name: AZW3
+    title: AZW3
+    weight: 12
+  -  6
+    maxSize: 350
+    minSize: 0
+    quality:
+       13
+      name: Unknown Audio
+    title: Unknown Audio
+    weight: 50
+  -  7
+    maxSize: 350
+    minSize: 0
+    quality:
+       10
+      name: MP3
+    title: MP3
+    weight: 100
+  -  8
+    maxSize: 350
+    minSize: 0
+    quality:
+       12
+      name: M4B
+    title: M4B
+    weight: 105
+  -  9
+    minSize: 0
+    quality:
+       11
+      name: FLAC
+    title: FLAC
+    weight: 110
+  qualityprofile:
+  - cutoff: 2
+     1
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown Text
+    - allowed: false
+      items: []
+      quality:
+         1
+        name: PDF
+    - allowed: true
+      items: []
+      quality:
+         2
+        name: MOBI
+    - allowed: true
+      items: []
+      quality:
+         3
+        name: EPUB
+    - allowed: true
+      items: []
+      quality:
+         4
+        name: AZW3
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: Unknown Audio
+    - allowed: false
+      items: []
+      quality:
+         10
+        name: MP3
+    - allowed: false
+      items: []
+      quality:
+         12
+        name: M4B
+    - allowed: false
+      items: []
+      quality:
+         11
+        name: FLAC
+    name: eBook
+    upgradeAllowed: false
+  - cutoff: 10
+     2
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown Text
+    - allowed: false
+      items: []
+      quality:
+         1
+        name: PDF
+    - allowed: false
+      items: []
+      quality:
+         2
+        name: MOBI
+    - allowed: false
+      items: []
+      quality:
+         3
+        name: EPUB
+    - allowed: false
+      items: []
+      quality:
+         4
+        name: AZW3
+    - allowed: true
+      items: []
+      quality:
+         13
+        name: Unknown Audio
+    - allowed: true
+      items: []
+      quality:
+         10
+        name: MP3
+    - allowed: true
+      items: []
+      quality:
+         12
+        name: M4B
+    - allowed: true
+      items: []
+      quality:
+         11
+        name: FLAC
+    name: Spoken
+    upgradeAllowed: false
+  releaseprofile: []
+  remotepathmapping: []
+  rootfolder: []
+  tag: []
+sonarr:
+  config:
+    ui:
+      calendarWeekColumnHeader: ddd M/D
+      enableColorImpairedMode: false
+      firstDayOfWeek: 0
+       1
+      longDateFormat: dddd, MMMM D YYYY
+      shortDateFormat: MMM D YYYY
+      showRelativeDates: true
+      timeFormat: h(:mm)a
+  customfilter: []
+  delayprofile:
+  - bypassIfHighestQuality: true
+    enableTorrent: true
+    enableUsenet: true
+     1
+    preferredProtocol: usenet
+    tags: []
+    torrentDelay: 0
+    usenetDelay: 0
+  downloadclient: []
+  importlist: []
+  importlistexclusion: []
+  indexer: []
+  languageprofile:
+  - cutoff:
+       1
+      name: English
+     1
+    languages:
+    - allowed: false
+      language:
+         13
+        name: Vietnamese
+    - allowed: false
+      language:
+         0
+        name: Unknown
+    - allowed: false
+      language:
+         30
+        name: Ukrainian
+    - allowed: false
+      language:
+         17
+        name: Turkish
+    - allowed: false
+      language:
+         14
+        name: Swedish
+    - allowed: false
+      language:
+         3
+        name: Spanish
+    - allowed: false
+      language:
+         11
+        name: Russian
+    - allowed: false
+      language:
+         18
+        name: Portuguese
+    - allowed: false
+      language:
+         12
+        name: Polish
+    - allowed: false
+      language:
+         15
+        name: Norwegian
+    - allowed: false
+      language:
+         29
+        name: Malayalam
+    - allowed: false
+      language:
+         24
+        name: Lithuanian
+    - allowed: false
+      language:
+         21
+        name: Korean
+    - allowed: false
+      language:
+         8
+        name: Japanese
+    - allowed: false
+      language:
+         5
+        name: Italian
+    - allowed: false
+      language:
+         9
+        name: Icelandic
+    - allowed: false
+      language:
+         22
+        name: Hungarian
+    - allowed: false
+      language:
+         27
+        name: Hindi
+    - allowed: false
+      language:
+         23
+        name: Hebrew
+    - allowed: false
+      language:
+         20
+        name: Greek
+    - allowed: false
+      language:
+         4
+        name: German
+    - allowed: false
+      language:
+         2
+        name: French
+    - allowed: false
+      language:
+         19
+        name: Flemish
+    - allowed: false
+      language:
+         16
+        name: Finnish
+    - allowed: true
+      language:
+         1
+        name: English
+    - allowed: false
+      language:
+         7
+        name: Dutch
+    - allowed: false
+      language:
+         6
+        name: Danish
+    - allowed: false
+      language:
+         25
+        name: Czech
+    - allowed: false
+      language:
+         10
+        name: Chinese
+    - allowed: false
+      language:
+         28
+        name: Bulgarian
+    - allowed: false
+      language:
+         26
+        name: Arabic
+    name: English
+    upgradeAllowed: false
+  metadata:
+  - configContract: XbmcMetadataSettings
+    enable: false
+    fields:
+    - name: seriesMetadata
+      section: metadata
+      value: true
+    - name: seriesMetadataUrl
+      section: metadata
+      value: false
+    - name: episodeMetadata
+      section: metadata
+      value: true
+    - name: seriesImages
+      section: image
+      value: true
+    - name: seasonImages
+      section: image
+      value: true
+    - name: episodeImages
+      section: image
+      value: true
+     1
+    implementation: XbmcMetadata
+    implementationName: Kodi (XBMC) / Emby
+    name: Kodi (XBMC) / Emby
+    tags: []
+  - configContract: RoksboxMetadataSettings
+    enable: false
+    fields:
+    - name: episodeMetadata
+      section: metadata
+      value: true
+    - name: seriesImages
+      section: image
+      value: true
+    - name: seasonImages
+      section: image
+      value: true
+    - name: episodeImages
+      section: image
+      value: true
+     3
+    implementation: RoksboxMetadata
+    implementationName: Roksbox
+    name: Roksbox
+    tags: []
+  - configContract: WdtvMetadataSettings
+    enable: false
+    fields:
+    - name: episodeMetadata
+      section: metadata
+      value: true
+    - name: seriesImages
+      section: image
+      value: true
+    - name: seasonImages
+      section: image
+      value: true
+    - name: episodeImages
+      section: image
+      value: true
+     2
+    implementation: WdtvMetadata
+    implementationName: WDTV
+    name: WDTV
+    tags: []
+  notification: []
+  qualitydefinition:
+  -  1
+    maxSize: 199.9
+    minSize: 1.0
+    quality:
+       0
+      name: Unknown
+      resolution: 0
+      source: unknown
+    title: Unknown
+    weight: 1
+  -  2
+    maxSize: 100.0
+    minSize: 2.0
+    quality:
+       1
+      name: SDTV
+      resolution: 480
+      source: television
+    title: SDTV
+    weight: 2
+  -  3
+    maxSize: 100.0
+    minSize: 2.0
+    quality:
+       12
+      name: WEBRip-480p
+      resolution: 480
+      source: webRip
+    title: WEBRip-480p
+    weight: 3
+  -  4
+    maxSize: 100.0
+    minSize: 2.0
+    quality:
+       8
+      name: WEBDL-480p
+      resolution: 480
+      source: web
+    title: WEBDL-480p
+    weight: 3
+  -  5
+    maxSize: 100.0
+    minSize: 2.0
+    quality:
+       2
+      name: DVD
+      resolution: 480
+      source: dvd
+    title: DVD
+    weight: 4
+  -  6
+    maxSize: 100.0
+    minSize: 2.0
+    quality:
+       13
+      name: Bluray-480p
+      resolution: 480
+      source: bluray
+    title: Bluray-480p
+    weight: 5
+  -  7
+    maxSize: 125.0
+    minSize: 3.0
+    quality:
+       4
+      name: HDTV-720p
+      resolution: 720
+      source: television
+    title: HDTV-720p
+    weight: 6
+  -  8
+    maxSize: 125.0
+    minSize: 4.0
+    quality:
+       9
+      name: HDTV-1080p
+      resolution: 1080
+      source: television
+    title: HDTV-1080p
+    weight: 7
+  -  9
+    minSize: 4.0
+    quality:
+       10
+      name: Raw-HD
+      resolution: 1080
+      source: televisionRaw
+    title: Raw-HD
+    weight: 8
+  -  10
+    maxSize: 130.0
+    minSize: 3.0
+    quality:
+       14
+      name: WEBRip-720p
+      resolution: 720
+      source: webRip
+    title: WEBRip-720p
+    weight: 9
+  -  11
+    maxSize: 130.0
+    minSize: 3.0
+    quality:
+       5
+      name: WEBDL-720p
+      resolution: 720
+      source: web
+    title: WEBDL-720p
+    weight: 9
+  -  12
+    maxSize: 130.0
+    minSize: 4.0
+    quality:
+       6
+      name: Bluray-720p
+      resolution: 720
+      source: bluray
+    title: Bluray-720p
+    weight: 10
+  -  13
+    maxSize: 130.0
+    minSize: 4.0
+    quality:
+       15
+      name: WEBRip-1080p
+      resolution: 1080
+      source: webRip
+    title: WEBRip-1080p
+    weight: 11
+  -  14
+    maxSize: 130.0
+    minSize: 4.0
+    quality:
+       3
+      name: WEBDL-1080p
+      resolution: 1080
+      source: web
+    title: WEBDL-1080p
+    weight: 11
+  -  15
+    maxSize: 155.0
+    minSize: 4.0
+    quality:
+       7
+      name: Bluray-1080p
+      resolution: 1080
+      source: bluray
+    title: Bluray-1080p
+    weight: 12
+  -  16
+    minSize: 35.0
+    quality:
+       20
+      name: Bluray-1080p Remux
+      resolution: 1080
+      source: blurayRaw
+    title: Bluray-1080p Remux
+    weight: 13
+  -  17
+    maxSize: 199.9
+    minSize: 35.0
+    quality:
+       16
+      name: HDTV-2160p
+      resolution: 2160
+      source: television
+    title: HDTV-2160p
+    weight: 14
+  -  18
+    minSize: 35.0
+    quality:
+       17
+      name: WEBRip-2160p
+      resolution: 2160
+      source: webRip
+    title: WEBRip-2160p
+    weight: 15
+  -  19
+    minSize: 35.0
+    quality:
+       18
+      name: WEBDL-2160p
+      resolution: 2160
+      source: web
+    title: WEBDL-2160p
+    weight: 15
+  -  20
+    minSize: 35.0
+    quality:
+       19
+      name: Bluray-2160p
+      resolution: 2160
+      source: bluray
+    title: Bluray-2160p
+    weight: 16
+  -  21
+    minSize: 35.0
+    quality:
+       21
+      name: Bluray-2160p Remux
+      resolution: 2160
+      source: blurayRaw
+    title: Bluray-2160p Remux
+    weight: 17
+  qualityprofile:
+  - cutoff: 1
+     1
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: true
+      items: []
+      quality:
+         1
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: true
+       1000
+      items:
+      - allowed: true
+        items: []
+        quality:
+           12
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+           8
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: true
+      items: []
+      quality:
+         2
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         4
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: true
+      items: []
+      quality:
+         9
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         10
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: true
+       1001
+      items:
+      - allowed: true
+        items: []
+        quality:
+           14
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+           5
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: true
+      items: []
+      quality:
+         6
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           15
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+           3
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: true
+      items: []
+      quality:
+         7
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         20
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: false
+      items: []
+      quality:
+         16
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           17
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           18
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: Any
+    upgradeAllowed: false
+  - cutoff: 1
+     2
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: true
+      items: []
+      quality:
+         1
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: true
+       1000
+      items:
+      - allowed: true
+        items: []
+        quality:
+           12
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+           8
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: true
+      items: []
+      quality:
+         2
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         4
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         9
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         10
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           14
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           5
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: false
+      items: []
+      quality:
+         6
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           15
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           3
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: false
+      items: []
+      quality:
+         7
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         20
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: false
+      items: []
+      quality:
+         16
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           17
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           18
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: SD
+    upgradeAllowed: false
+  - cutoff: 4
+     3
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         1
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           12
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           8
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         2
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+         4
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         9
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         10
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: true
+       1001
+      items:
+      - allowed: true
+        items: []
+        quality:
+           14
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+           5
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: true
+      items: []
+      quality:
+         6
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           15
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           3
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: false
+      items: []
+      quality:
+         7
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         20
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: false
+      items: []
+      quality:
+         16
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           17
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           18
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: HD-720p
+    upgradeAllowed: false
+  - cutoff: 9
+     4
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         1
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           12
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           8
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         2
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         4
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: true
+      items: []
+      quality:
+         9
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         10
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           14
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           5
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: false
+      items: []
+      quality:
+         6
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+       1002
+      items:
+      - allowed: true
+        items: []
+        quality:
+           15
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+           3
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: true
+      items: []
+      quality:
+         7
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         20
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: false
+      items: []
+      quality:
+         16
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: false
+       1003
+      items:
+      - allowed: false
+        items: []
+        quality:
+           17
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           18
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+         19
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         21
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: HD-1080p
+    upgradeAllowed: false
+  - cutoff: 16
+     5
+    items:
+    - allowed: false
+      items: []
+      quality:
+         0
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+         1
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: false
+       1000
+      items:
+      - allowed: false
+        items: []
+        quality:
+           12
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           8
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+         2
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+         13
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+         4
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         9
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+         10
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: false
+       1001
+      items:
+      - allowed: false
+        items: []
+        quality:
+           14
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+           5
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: false
+      items: []
+      quality:
+         6
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: false
+       1002
+      items:
+      - allowed: false
+        items: []
+        quality:
+           15
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: true
+      items: []
+      quality:
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: true
+      items: []
+      quality:
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: Ultra-HD
+    upgradeAllowed: false
+  - cutoff: 4
+    items:
+    - allowed: false
+      items: []
+      quality:
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: false
+      items: []
+      quality:
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: false
+      items:
+      - allowed: false
+        items: []
+        quality:
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: false
+      items: []
+      quality:
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: true
+      items: []
+      quality:
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: true
+      items: []
+      quality:
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: true
+      items: []
+      quality:
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: false
+      items: []
+      quality:
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: false
+      items:
+      - allowed: false
+        items: []
+        quality:
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: HD - 720p/1080p
+    upgradeAllowed: false
+  releaseprofile: []
+  remotepathmapping: []
+  rootfolder: []
+  tag:
+    detail: []

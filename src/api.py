@@ -1,12 +1,12 @@
 from __future__ import annotations
-from typing import Optional
-
+from typing import Optional, Union
+from json import JSONDecodeError
 import requests
 from requests.adapters import HTTPAdapter
 from requests.exceptions import HTTPError
 from urllib3.util import Retry
-
-from constants import API_BASES, Service
+from utils import delete_dict_keys
+from constants import API_BASES, Service, UNWANTED_CFG_FIELDS
 
 
 class Api:
@@ -25,6 +25,9 @@ class Api:
 
     def initialize(self) -> Api:
         """Make actual API connection."""
+        if self.session:  # check if already initialized
+            return self
+
         print(f"Initializing connection to {self.service}")
         adapter = HTTPAdapter(max_retries=Retry(total=10, backoff_factor=0.1))
         self.session = requests.Session()
@@ -39,57 +42,52 @@ class Api:
 
         self.session.headers.update({'X-Api-Key': self.api_key})
 
-        self.get("/health")  # Test connection
+        self.session.get(f"{self.base_url}/health")  # Test connection
         print('Successfully connected to the server.')
         return self
 
     @staticmethod
-    def raise_for_status_and_log(response):
+    def _raise_for_status_and_log(response):
         try:
             response.raise_for_status()
         except HTTPError:
             print(f"ERROR on: {response.url}")
-            print(response.json())
+            try:
+                print(response.json())
+            except JSONDecodeError:
+                pass
             raise
 
-    def get(self, resource: str) -> dict:
+    def get(self, resource: str) -> Union[dict, list]:
         """Perform a get request on resource with optional id."""
         req = f"{self.base_url}{resource}"
         print(f"Fetching: {req}")
         response = self.session.get(req)
-        self.raise_for_status_and_log(response)
-        return response.json()
+        self._raise_for_status_and_log(response)
+        # Filter unwanted response fields and guarantee result sorting
+        try:
+            if isinstance(response.json(), list):
+                return sorted([delete_dict_keys(v, UNWANTED_CFG_FIELDS) for v in response.json()], key=lambda x: x['id'])
+            if isinstance(response.json(), dict):
+                return delete_dict_keys(response.json(), UNWANTED_CFG_FIELDS)
+        except KeyError:
+            raise KeyError(f"ERROR on: {resource}: {response.json()}")
 
-    def create(self, resource: str, body: list) -> None:
+    def create(self, resource: str, body: dict) -> None:
         """Create a list of resources (while clearing the old)."""
-        old_cfg = self.get(resource)
-        for old_item in old_cfg:
-            try:
-                self.delete(resource, old_item["id"])
-            except HTTPError as e:
-                if e.response.status_code == 405:
-                    print("Skipping global config that cannot be deleted.")
-        for new_item in body:
-            # Some requests can take along time (like setting an indexer in prowlarr).
-            print(resource)
-            if resource == "delayprofile" and new_item['Tags'] == []:
-                self.update(resource, new_item)
-            else:
-                response = self.session.post(f"{self.base_url}{resource}", json=new_item, timeout=40)
-                print(f"Configured (one of): {self.base_url}{resource}")
-                self.raise_for_status_and_log(response)
+        response = self.session.post(f"{self.base_url}{resource}", json=body, timeout=40)
+        self._raise_for_status_and_log(response)
+        print(f"Configured (one of): {self.base_url}{resource}")
 
-    def update(self, resource: str, body: dict) -> None:
+    def update(self, resource: str, id: int, body: dict) -> None:
         """Update an existing resource."""
-        cfg = self.get(resource)
-        cfg.update(**body)
-        response = self.session.put(f"{self.base_url}{resource}/{cfg['id']}", json=cfg)
-        print(f"Configured: {self.base_url}{resource}/{cfg['id']}")
-        self.raise_for_status_and_log(response)
+        response = self.session.put(f"{self.base_url}{resource}/{id}", json=body)
+        self._raise_for_status_and_log(response)
+        print(f"Configured: {self.base_url}{resource}/{id}")
 
     def delete(self, resource: str, id: int) -> None:
         """Delete existing resource with specified id."""
         req = f"{self.base_url}{resource}/{id}"
         print(f"Deleting: {req}")
         response = self.session.delete(req)
-        self.raise_for_status_and_log(response)
+        self._raise_for_status_and_log(response)

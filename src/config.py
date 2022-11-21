@@ -1,63 +1,69 @@
 from collections import UserDict
-from typing import Union
+from typing import Optional
+
+from collections import Container
 
 import yaml
 from pyaml_env import parse_config
-
+from utils import get_nested_value
+from models import AppSetting
 from api import Api
-from constants import Service, CONFIG_DEFAULT_LOCATION, UNWANTED_CFG_FIELDS, PATHS
-from utils import recursive_delete_dict_keys_from_obj
+from constants import Service, CONFIG_DEFAULT_LOCATION, PATHS
+# from utils import recursive_delete_dict_keys_from_obj
 
 
 class Config(UserDict):
-    def __init__(self, data):
-        self.services = [Service(app) for app in data.keys()]
-        super().__init__(data)
+    def __init__(self, services: dict, data: Optional[dict] = None):
+        super().__init__(self._create_appsettings(services, cfg=data))
+
+    def test(self):
+        res = {}
+        for service, settings in self.items():
+            l = {}
+            for setting in settings:
+                l[setting.resource] = setting.current_config
+            res[service] = l
+        return res
 
     @classmethod
-    def from_yaml(cls, filename: str = CONFIG_DEFAULT_LOCATION):
+    def from_yaml(cls, services: dict, filename: str = CONFIG_DEFAULT_LOCATION):
         """Create a Config from yaml."""
-        # TODO: add ('id'?) keys for unconfigured list items, such that they can get deleted
         cfg = parse_config(filename, default_value='')
-        return cls(cfg)
+        return cls(services, data=cfg)
 
     @classmethod
-    def from_existing(cls, services: dict):
+    def from_current(cls, services):
+        return cls(services)
+
+    @staticmethod
+    def _create_appsettings(services: dict, cfg: Optional[dict] = None):
         """Get a Config from existing running services."""
-        def get_current_cfg(service: str, address: str, port: int):
-            api = Api(Service(service), address=address, port=port).initialize()
-            res = {}
-            for path in PATHS[service]:
-                value = api.get(path)
-                recursive_delete_dict_keys_from_obj(value, UNWANTED_CFG_FIELDS)  # filter response
-                for key in reversed(path[1:].split('/')):  # start turning paths into nested dicts
-                    value = {key: value}
-                res.update(value)
-            return {service: res}
+        if not cfg:  # No config passed: initialize empty
+            cfg = {k.value: {} for k in Service}
+
+        def get_current_cfg(service: str, cfg: dict, address: str, port: int):
+            api = Api(Service(service), address=address, port=port)
+            return {path: AppSetting(get_nested_value(cfg[service], path), resource=path, api=api) for path in PATHS[service]}
+            # for path in PATHS[service]:
+            #     settings.append(AppSetting(get_nested_value(cfg[service], path), resource=path, api=api))
+            # return settings
 
         config = {}
         for service, addr in services.items():
-            config.update(get_current_cfg(service, addr['address'], addr['port']))
-        return cls(config)
+            print(f"{service=}")
+            print(f"{addr=}")
+            config[service] = get_current_cfg(service, cfg, addr['address'], addr['port'])
 
-    def apply(self, services: dict):
-        """Apply a Config to running services."""
-        for app in services:
-            api = Api(Service(app), **services[app]).initialize()
-            self._triage_and_apply(self[app], api)
+        return config
+
+    # def apply(self, services: dict):
+    #     """Apply a Config to running services."""
+    #     for app in services:
+    #         api = Api(Service(app), **services[app]).initialize()
+    #         self._triage_and_apply(self[app], api)
 
     def to_file(self, filename: str = CONFIG_DEFAULT_LOCATION):
         """Dump the Config to a YAML file."""
         with open(filename, 'w') as file:
             yaml.dump(self.data, file)
 
-    def _triage_and_apply(self, obj: Union[dict, list], api: Api, resource: str = '') -> None:
-        """Walk over all the (nested) Config items and apply their settings"""
-        if isinstance(obj, dict):
-            if any(isinstance(obj[key], (dict, list)) for key in obj):
-                for key in obj:
-                    self._triage_and_apply(obj[key], api, f"{resource}/{key}")
-            else:
-                api.update(resource, obj)
-        elif isinstance(obj, list):
-            api.create(resource, obj)

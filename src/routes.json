@@ -19,7 +19,6 @@
         "/qualityprofile",
         "/releaseprofile",
         "/remotepathmapping",
-        "/rootfolder",
         "/tag",
         "/tag/detail",
         "/config/ui"
@@ -59,7 +58,6 @@
         "/qualityprofile",
         "/remotepathmapping",
         "/restriction",
-        "/rootfolder",
         "/tag",
         "/tag/detail",
         "/config/ui"
@@ -82,7 +80,6 @@
         "/qualityprofile",
         "/releaseprofile",
         "/remotepathmapping",
-        "/rootfolder",
         "/tag",
         "/config/ui"
     ],
@@ -105,7 +102,6 @@
         "/qualityprofile",
         "/releaseprofile",
         "/remotepathmapping",
-        "/rootfolder",
         "/tag",
         "/tag/detail",
         "/config/ui"

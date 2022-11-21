@@ -1,8 +1,9 @@
 import json
 import re
+from src.utils import nest_dict
 
-SWAGGER_FILES = ['lidarr-v1.json', 'prowlarr-v1.json', 'radarr-v3.json', 'readarr-v1.json',
-                 'sonarr-v3.json']
+SWAGGER_FILES = ['docs/lidarr-v1.json', 'docs/prowlarr-v1.json', 'docs/radarr-v3.json', 'docs/readarr-v1.json',
+                 'docs/sonarr-v3.json']
 
 EXCLUDED_PATHS = ['{', 'log', 'routes', 'schema', 'initialize.js', 'health', 'calendar', 'search', 'update', 'rename',
                   'wanted', 'history', 'queue', 'command', 'diskspace', 'parse', 'backup', 'blocklist']
@@ -16,8 +17,7 @@ def parse_swagger(file):
     # Exclude some recurring irrelevant paths
     filtered = [p for p in paths if not any(x in p for x in EXCLUDED_PATHS)]
     removed_prefix = [re.sub(r'/api/v[0-9]', '', p) for p in filtered]
-    return removed_prefix
-
+    return nest_dict({k: '' for k in removed_prefix}, sep='/', sep_idx=1)
 
 d = {}  # Produce initial list, to be manually filtered later
 for f in SWAGGER_FILES:
