@@ -65,13 +65,13 @@ class Api:
         response = self.session.get(req)
         self._raise_for_status_and_log(response)
         # Filter unwanted response fields and guarantee result sorting
-        try:
-            if isinstance(response.json(), list):
-                return sorted([delete_dict_keys(v, UNWANTED_CFG_FIELDS) for v in response.json()], key=lambda x: x['id'])
-            if isinstance(response.json(), dict):
-                return delete_dict_keys(response.json(), UNWANTED_CFG_FIELDS)
-        except KeyError:
-            raise KeyError(f"ERROR on: {resource}: {response.json()}")
+        # try:
+        if isinstance(response.json(), list):
+            return sorted([delete_dict_keys(v, UNWANTED_CFG_FIELDS) for v in response.json()], key=lambda x: x['id'])
+        if isinstance(response.json(), dict):
+            return delete_dict_keys(response.json(), UNWANTED_CFG_FIELDS)
+        # except KeyError:
+        #     raise KeyError(f"ERROR on: {resource}: {response.json()}")
 
     def create(self, resource: str, body: dict) -> None:
         """Create a list of resources (while clearing the old)."""

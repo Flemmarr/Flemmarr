@@ -57,8 +57,8 @@ def main():
 if __name__ == "__main__":
     import json
 
-    with open('routes.json') as f:
-        paths = json.load(f)
+    # with open('__routes.json') as f:
+    #     paths = json.load(f)
 
 
     print('laal')

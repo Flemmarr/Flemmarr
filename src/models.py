@@ -1,12 +1,16 @@
 from functools import cached_property
-
-from requests import HTTPError
 from itertools import zip_longest
+from typing import Union
+
+import yaml
+from requests import HTTPError
 
 from api import Api
 
 
-class AppSetting:
+class AppSetting(yaml.YAMLObject):
+    yaml_tag = u''
+
     def __init__(self, *args, resource, api: Api, **kwargs):
         self.api = api
         self.resource = resource
@@ -20,8 +24,20 @@ class AppSetting:
     def __repr__(self):
         return f"{self._current_config}"
 
+    def __json__(self):
+        """Facilitate json serialization using ComplexEncoder"""
+        return self._current_config
+
+    @classmethod
+    def to_yaml(cls, dumper, data):
+        """Facilitate yaml serialization"""
+        if isinstance(data._current_config, dict):
+            return dumper.represent_mapping("tag:yaml.org,2002:map", data._current_config)
+        if isinstance(data._current_config, list):
+            return dumper.represent_sequence("tag:yaml.org,2002:seq", data._current_config)
+
     @cached_property
-    def _current_config(self):
+    def _current_config(self) -> Union[dict, list]:
         self.api.initialize()
         return self.api.get(self.resource)
 
@@ -39,6 +55,3 @@ class AppSetting:
                 except HTTPError as e:
                     if e.response.status_code == 405:
                         print("Skipping unconfigured item that cannot be deleted.")
-
-
-# a = AppSetting([{"uiLanguage": 4}], resource='/config/ui', api=Api(service=Service.READARR, address='localhost', port=8787))

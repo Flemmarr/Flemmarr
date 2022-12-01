@@ -1,5 +1,14 @@
 from contextlib import suppress
 from typing import Optional
+import json
+
+
+class ComplexEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if hasattr(obj, '__json__'):
+            return obj.__json__()
+        else:
+            return json.JSONEncoder.default(self, obj)
 
 
 def delete_dict_keys(obj: dict, keys: list) -> dict:

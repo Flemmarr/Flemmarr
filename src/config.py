@@ -1,60 +1,52 @@
+import json
 from collections import UserDict
 from typing import Optional
 
-from collections import Container
-
 import yaml
 from pyaml_env import parse_config
-from utils import get_nested_value
-from models import AppSetting
+
 from api import Api
-from constants import Service, CONFIG_DEFAULT_LOCATION, PATHS
-# from utils import recursive_delete_dict_keys_from_obj
+from constants import Service, CONFIG_DEFAULT_LOCATION, API_PATHS_LOCATION
+from models import AppSetting
+from utils import ComplexEncoder
 
 
 class Config(UserDict):
-    def __init__(self, services: dict, data: Optional[dict] = None):
-        super().__init__(self._create_appsettings(services, cfg=data))
-
-    def test(self):
-        res = {}
-        for service, settings in self.items():
-            l = {}
-            for setting in settings:
-                l[setting.resource] = setting.current_config
-            res[service] = l
-        return res
+    def __init__(self, data: Optional[dict] = None):
+        super().__init__(data)
 
     @classmethod
-    def from_yaml(cls, services: dict, filename: str = CONFIG_DEFAULT_LOCATION):
-        """Create a Config from yaml."""
-        cfg = parse_config(filename, default_value='')
-        return cls(services, data=cfg)
+    def from_yaml(cls, services: dict, filename: str):
+        base_cfg = parse_config(API_PATHS_LOCATION, default_value='')
+        new_config = parse_config(filename)
 
-    @classmethod
-    def from_current(cls, services):
-        return cls(services)
+        for service, location in services.items():
+            api = Api(Service(service), address=location["address"], port=location["port"])
+            base_cfg[service] = cls._deep_update(base_cfg[service], new_config[service], api=api)
+        return cls(new_config)
 
     @staticmethod
-    def _create_appsettings(services: dict, cfg: Optional[dict] = None):
-        """Get a Config from existing running services."""
-        if not cfg:  # No config passed: initialize empty
-            cfg = {k.value: {} for k in Service}
-
-        def get_current_cfg(service: str, cfg: dict, address: str, port: int):
-            api = Api(Service(service), address=address, port=port)
-            return {path: AppSetting(get_nested_value(cfg[service], path), resource=path, api=api) for path in PATHS[service]}
-            # for path in PATHS[service]:
-            #     settings.append(AppSetting(get_nested_value(cfg[service], path), resource=path, api=api))
-            # return settings
-
-        config = {}
-        for service, addr in services.items():
-            print(f"{service=}")
-            print(f"{addr=}")
-            config[service] = get_current_cfg(service, cfg, addr['address'], addr['port'])
-
-        return config
+    def _deep_update(mapping: dict, updating_mapping: dict, api: Api) -> dict:
+        updated_mapping = mapping.copy()
+        for k, v in updated_mapping.items():
+            if k in updating_mapping and isinstance(v, dict):
+                for k2 in updated_mapping[k]:
+                    if k2 in updating_mapping[k]:
+                        if isinstance(updating_mapping[k][k2], list):
+                            updated_mapping[k][k2] = AppSetting(updating_mapping[k][k2], resource=f"/{k}/{k2}", api=api)
+                        elif isinstance(updating_mapping[k][k2], dict):
+                            updated_mapping[k][k2] = AppSetting(resource=f"/{k}/{k2}", api=api,
+                                                                **updating_mapping[k][k2])
+                    else:
+                        updated_mapping[k][k2] = AppSetting(resource=f"/{k}/{k2}", api=api)
+            elif k in updating_mapping:
+                if isinstance(updating_mapping[k], list):
+                    updated_mapping[k] = AppSetting(updating_mapping[k], resource=f"/{k}", api=api)
+                elif isinstance(updating_mapping[k], dict):
+                    updated_mapping[k] = AppSetting(resource=f"/{k}", api=api, **updating_mapping[k])
+            else:
+                updated_mapping[k] = AppSetting(resource=f"/{k}", api=api)
+        return updated_mapping
 
     # def apply(self, services: dict):
     #     """Apply a Config to running services."""
@@ -62,8 +54,10 @@ class Config(UserDict):
     #         api = Api(Service(app), **services[app]).initialize()
     #         self._triage_and_apply(self[app], api)
 
-    def to_file(self, filename: str = CONFIG_DEFAULT_LOCATION):
-        """Dump the Config to a YAML file."""
+    def to_json(self, filename: str):
         with open(filename, 'w') as file:
-            yaml.dump(self.data, file)
+            json.dump(self.data, file, cls=ComplexEncoder)
 
+    def to_yaml(self, filename: str = CONFIG_DEFAULT_LOCATION):
+        with open(filename, 'w') as file:
+            yaml.dump(self.data, file, default_flow_style=False)
