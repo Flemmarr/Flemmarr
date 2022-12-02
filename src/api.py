@@ -59,31 +59,29 @@ class Api:
             raise
 
     def get(self, resource: str) -> Union[dict, list]:
-        """Perform a get request on resource with optional id."""
+        """Perform a get request on resource."""
         req = f"{self.base_url}{resource}"
         print(f"Fetching: {req}")
         response = self.session.get(req)
         self._raise_for_status_and_log(response)
         # Filter unwanted response fields and guarantee result sorting
-        # try:
         if isinstance(response.json(), list):
-            return sorted([delete_dict_keys(v, UNWANTED_CFG_FIELDS) for v in response.json()], key=lambda x: x['id'])
+            sorted_response = sorted(response.json(), key=lambda x: x['id'])
+            return [delete_dict_keys(v, UNWANTED_CFG_FIELDS) for v in sorted_response]
         if isinstance(response.json(), dict):
             return delete_dict_keys(response.json(), UNWANTED_CFG_FIELDS)
-        # except KeyError:
-        #     raise KeyError(f"ERROR on: {resource}: {response.json()}")
 
     def create(self, resource: str, body: dict) -> None:
-        """Create a list of resources (while clearing the old)."""
+        """Create a new resource."""
         response = self.session.post(f"{self.base_url}{resource}", json=body, timeout=40)
         self._raise_for_status_and_log(response)
-        print(f"Configured (one of): {self.base_url}{resource}")
+        print(f"Created (one of): {self.base_url}{resource}")
 
     def update(self, resource: str, id: int, body: dict) -> None:
         """Update an existing resource."""
         response = self.session.put(f"{self.base_url}{resource}/{id}", json=body)
         self._raise_for_status_and_log(response)
-        print(f"Configured: {self.base_url}{resource}/{id}")
+        print(f"Updated: {self.base_url}{resource}/{id}")
 
     def delete(self, resource: str, id: int) -> None:
         """Delete existing resource with specified id."""

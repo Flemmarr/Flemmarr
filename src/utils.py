@@ -1,5 +1,4 @@
 from contextlib import suppress
-from typing import Optional
 import json
 
 
@@ -17,35 +16,6 @@ def delete_dict_keys(obj: dict, keys: list) -> dict:
         with suppress(KeyError):
             del obj[key]
     return obj
-
-
-def get_nested_value(d: dict, key: str, sep='/') -> Optional[list]:
-    """
-    d: {"config": {"ui": "value"}}
-    key: /config/ui
-    return: [value]
-    """
-    for _ in key.split(sep)[1:]:
-        try:
-            d = d[_]
-        except KeyError:
-            return None
-    return d if isinstance(d, list) else [d]
-
-
-
-
-#
-# def deep_update(mapping: dict, updating_mapping: dict) -> dict:
-#     updated_mapping = mapping.copy()
-#     for k, v in updating_mapping.items():
-#         if k in updated_mapping and isinstance(updated_mapping[k], dict) and isinstance(v, dict):
-#             updated_mapping[k] = deep_update(updated_mapping[k], v)
-#         elif k in updated_mapping:
-#             updated_mapping[k] = v
-#         else:
-#             raise NotImplementedError(f"Setting: {k} is not supported.")
-#     return updated_mapping
 
 
 def nest_dict(flat_dict: dict, sep='_', sep_idx=0) -> dict:

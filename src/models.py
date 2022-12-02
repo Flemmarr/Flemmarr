@@ -11,7 +11,7 @@ from api import Api
 class AppSetting(yaml.YAMLObject):
     yaml_tag = u''
 
-    def __init__(self, *args, resource, api: Api, **kwargs):
+    def __init__(self, *args, resource: str, api: Api, **kwargs):
         self.api = api
         self.resource = resource
         if args:
@@ -42,8 +42,17 @@ class AppSetting(yaml.YAMLObject):
         return self.api.get(self.resource)
 
     def apply(self):
-        for current, new in zip_longest(self._current_config, self._new_config):
-            if current and new:
+        """Loop over two ordered lists, one of the current resource settings (one or more items),
+        and second list for the new resource settings (of one or more items). Depending on the existence
+        of either, we either update, create, delete or do nothing."""
+        print(f"Applying {self.api.service}: {self.resource}")
+        current_cfg = self._current_config
+        if not isinstance(self._current_config, list):
+            current_cfg = [self._current_config]
+        for current, new in zip_longest(current_cfg, self._new_config):
+            if not current and not new:
+                continue  # nothing to be updated
+            elif current and new:
                 body = current.copy()
                 body.update(**new)
                 self.api.update(self.resource, id=current['id'], body=body)
@@ -54,4 +63,7 @@ class AppSetting(yaml.YAMLObject):
                     self.api.delete(self.resource, id=current['id'])
                 except HTTPError as e:
                     if e.response.status_code == 405:
+                        # Some configs cannot be deleted, e.g. when a default must always exist.
                         print("Skipping unconfigured item that cannot be deleted.")
+
+        self.__dict__.pop("_current_config", None)  # invalidate _current_config cache, since we changed it.
