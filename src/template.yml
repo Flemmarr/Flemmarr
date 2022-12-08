@@ -15,7 +15,8 @@ lidarr:
   metadataprofile: 
   qualitydefinition: 
   qualityprofile: 
-  releaseprofile: 
+  releaseprofile:
+  rootfolder:
   tag: 
 prowlarr:
   applications: 
@@ -38,8 +39,7 @@ radarr:
     mediamanagement: 
     metadata: 
     naming: 
-    ui: 
-  rootfolder: 
+    ui:
   customfilter: 
   delayprofile: 
   downloadclient: 
@@ -47,7 +47,8 @@ radarr:
   indexer:
   metadata:
   qualitydefinition:
-  qualityprofile: 
+  qualityprofile:
+  rootfolder:
   tag: 
 readarr:
   config:
@@ -65,7 +66,8 @@ readarr:
   metadataprofile: 
   qualitydefinition: 
   qualityprofile: 
-  releaseprofile: 
+  releaseprofile:
+  rootfolder:
   tag: 
 sonarr:
   config:
@@ -83,5 +85,6 @@ sonarr:
   metadata: 
   qualitydefinition: 
   qualityprofile: 
-  releaseprofile: 
+  releaseprofile:
+  rootfolder:
   tag: 
