@@ -11,7 +11,12 @@ from utils import ComplexEncoder
 
 
 class Config(UserDict):
-    def __init__(self, data: dict, services: dict):
+    def __init__(self, services: dict, data: dict = None):
+        self._need_to_apply = True
+        if not data:  # Initialize empty
+            data = {app: {} for app in services}
+            self._need_to_apply = False
+
         base_cfg = parse_config(API_PATHS_LOCATION, default_value='')
         for service, location in services.items():
             api = Api(Service(service), address=location["address"], port=location["port"])
@@ -21,13 +26,13 @@ class Config(UserDict):
     @classmethod
     def from_yaml(cls, services: dict, filename: str = CONFIG_DEFAULT_LOCATION):
         new_config = parse_config(filename)
-        return cls(new_config, services)
+        return cls(services=services, data=new_config)
 
     @staticmethod
     def _deep_update(mapping: dict, updating_mapping: dict, api: Api, prefix: str = '') -> dict:
         for k, v in mapping.items():
-            if k in updating_mapping and isinstance(v, dict):  # Nested settings (e.g. config/ui)
-                mapping[k] = Config._deep_update(mapping[k], updating_mapping[k], api, prefix=f"/{k}")
+            if isinstance(v, dict):  # Nested settings (e.g. config/ui)
+                mapping[k] = Config._deep_update(mapping[k], updating_mapping.get(k, {}), api, prefix=f"/{k}")
             elif k in updating_mapping:  # key is in new config, and either list or dict
                 if isinstance(updating_mapping[k], list):
                     mapping[k] = AppSetting(updating_mapping[k], resource=f"{prefix}/{k}", api=api)
@@ -39,19 +44,24 @@ class Config(UserDict):
 
     def apply(self):
         """Apply a Config to running services."""
-        for app in self.values():
-            for item in app.values():
+        def check_and_apply(cfg):
+            for item in cfg.values():
                 if isinstance(item, AppSetting):
                     item.apply()
                 elif isinstance(item, dict):
-                    for cfg_item in item.values():
-                        cfg_item.apply()  # AppSetting only ever nested max 2 deep
+                    check_and_apply(item)
+
+        if self._need_to_apply:
+            check_and_apply(self)
+            print('Successfully finished applying configurations.')
 
     def to_json(self, filename: str):
-        # TODO: remove 'id'
         with open(filename, 'w') as file:
             json.dump(self.data, file, cls=ComplexEncoder)
+        print('Successfully backed-up current configurations.')
 
     def to_yaml(self, filename: str = BACKUP_DEFAULT_LOCATION):
         with open(filename, 'w') as file:
             yaml.dump(self.data, file, default_flow_style=False)
+        print('Successfully backed-up current configurations.')
+

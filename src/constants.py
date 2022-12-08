@@ -34,4 +34,5 @@ UNWANTED_CFG_FIELDS = [
     "description",
     "capabilities",
     "added",
+    'apiKey'
 ]

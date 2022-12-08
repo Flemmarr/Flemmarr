@@ -3,9 +3,9 @@ from itertools import zip_longest
 from typing import Union
 
 import yaml
-from requests import HTTPError
 
 from api import Api
+from utils import remove_keys
 
 
 class AppSetting(yaml.YAMLObject):
@@ -25,16 +25,19 @@ class AppSetting(yaml.YAMLObject):
         return f"{self._current_config}"
 
     def __json__(self):
-        """Facilitate json serialization using ComplexEncoder"""
-        return self._current_config
+        """Facilitate json serialization using ComplexEncoder, and don't save 'id' field."""
+        return remove_keys(self._current_config, ['id'])
 
     @classmethod
     def to_yaml(cls, dumper, data):
-        """Facilitate yaml serialization"""
+        """Facilitate yaml serialization, and don't save 'id' field."""
+        # TODO: theres still ids in nested settings
         if isinstance(data._current_config, dict):
-            return dumper.represent_mapping("tag:yaml.org,2002:map", data._current_config)
+            return dumper.represent_mapping("tag:yaml.org,2002:map",
+                                            remove_keys(data._current_config, ['id']))
         if isinstance(data._current_config, list):
-            return dumper.represent_sequence("tag:yaml.org,2002:seq", data._current_config)
+            return dumper.represent_sequence("tag:yaml.org,2002:seq",
+                                             remove_keys(data._current_config, ['id']))
 
     @cached_property
     def _current_config(self) -> Union[dict, list]:
@@ -45,7 +48,6 @@ class AppSetting(yaml.YAMLObject):
         """Loop over two ordered lists, one of the current resource settings (one or more items),
         and second list for the new resource settings (of one or more items). Depending on the existence
         of either, we either update, create, delete or do nothing."""
-        print(f"Applying {self.api.service}: {self.resource}")
         current_cfg = self._current_config
         if not isinstance(self._current_config, list):
             current_cfg = [self._current_config]
@@ -59,11 +61,8 @@ class AppSetting(yaml.YAMLObject):
             elif not current:
                 self.api.create(self.resource, body=new)
             elif not new:
-                try:
-                    self.api.delete(self.resource, id=current['id'])
-                except HTTPError as e:
-                    if e.response.status_code == 405:
-                        # Some configs cannot be deleted, e.g. when a default must always exist.
-                        print("Skipping unconfigured item that cannot be deleted.")
+                # TODO: Should the config be assumed to reflect the entire state of the system?
+                #  if so, we should delete resources that are not configured in the config.
+                self.api.delete(self.resource, id=current['id'])
 
         self.__dict__.pop("_current_config", None)  # invalidate _current_config cache, since we changed it.

@@ -2,10 +2,11 @@ from __future__ import annotations
 from typing import Optional, Union
 from json import JSONDecodeError
 import requests
+from requests.models import Response
 from requests.adapters import HTTPAdapter
 from requests.exceptions import HTTPError
 from urllib3.util import Retry
-from utils import delete_dict_keys
+from utils import remove_keys
 from constants import API_BASES, Service, UNWANTED_CFG_FIELDS
 
 
@@ -42,21 +43,21 @@ class Api:
 
         self.session.headers.update({'X-Api-Key': self.api_key})
 
-        self.session.get(f"{self.base_url}/health")  # Test connection
+        self._raise_for_status_and_log(self.session.get(f"{self.base_url}/health"))  # Test connection
         print('Successfully connected to the server.')
         return self
 
     @staticmethod
-    def _raise_for_status_and_log(response):
+    def _raise_for_status_and_log(response: Response):
         try:
             response.raise_for_status()
         except HTTPError:
-            print(f"ERROR on: {response.url}")
+            print(f"ERROR code {response.status_code} on: {response.request.method} {response.url}")
             try:
                 print(response.json())
             except JSONDecodeError:
-                pass
-            raise
+                print("Response is not JSON.")
+            raise  # TODO: Crash and burn or continue?
 
     def get(self, resource: str) -> Union[dict, list]:
         """Perform a get request on resource."""
@@ -65,11 +66,7 @@ class Api:
         response = self.session.get(req)
         self._raise_for_status_and_log(response)
         # Filter unwanted response fields and guarantee result sorting
-        if isinstance(response.json(), list):
-            sorted_response = sorted(response.json(), key=lambda x: x['id'])
-            return [delete_dict_keys(v, UNWANTED_CFG_FIELDS) for v in sorted_response]
-        if isinstance(response.json(), dict):
-            return delete_dict_keys(response.json(), UNWANTED_CFG_FIELDS)
+        return remove_keys(response.json(), UNWANTED_CFG_FIELDS)
 
     def create(self, resource: str, body: dict) -> None:
         """Create a new resource."""
@@ -80,7 +77,17 @@ class Api:
     def update(self, resource: str, id: int, body: dict) -> None:
         """Update an existing resource."""
         response = self.session.put(f"{self.base_url}{resource}/{id}", json=body)
-        self._raise_for_status_and_log(response)
+        if response.status_code == 400:
+            # e.g. lidarr metadataprofile 'None' (default)
+            print("Cannot update, likely a 'reserved' config item.")
+        elif response.status_code == 405:
+            # Resource does not have a PUT method, 'updating' the hard way
+            # e.g. 'rootfolder' does not have this.
+            self.delete(resource, id)
+            del body['id']
+            self.create(resource, body)
+        else:
+            self._raise_for_status_and_log(response)
         print(f"Updated: {self.base_url}{resource}/{id}")
 
     def delete(self, resource: str, id: int) -> None:
@@ -88,4 +95,12 @@ class Api:
         req = f"{self.base_url}{resource}/{id}"
         print(f"Deleting: {req}")
         response = self.session.delete(req)
-        self._raise_for_status_and_log(response)
+        if response.status_code == 405:
+            # Some configs cannot be deleted, e.g. when a default must always exist.
+            print("Skipping unconfigured item that cannot be deleted.")
+            # Encountering this means config is not reflecting system state.
+        elif response.status_code in [400, 500] and "in use" in response.json()['message']:
+            # e.g. Readarr metadataprofile gave 400 when in use, and prowlarr appprofile gives 500
+            print("Skipping item that is still in use elsewhere.")
+        else:
+            self._raise_for_status_and_log(response)
