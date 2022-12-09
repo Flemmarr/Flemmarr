@@ -10,8 +10,8 @@ sonarr:
     - name: Series
       path: /data
       defaultTags: []
-      defaultQualityProfileId: 1
-      defaultMetadataProfileId: 1
+#      defaultQualityProfileId: 1  # cannot be specified, because this ID is not static
+#      defaultMetadataProfileId: 1
   downloadclient:
     - name: Transmission
       enable: true
@@ -35,8 +35,6 @@ radarr:
     - name: Movies
       path: /data
       defaultTags: []
-      defaultQualityProfileId: 1
-      defaultMetadataProfileId: 1
   downloadclient:
     - name: Transmission
       enable: true
@@ -59,9 +57,7 @@ lidarr:
   rootfolder:
     - name: Music
       path: /data
-      defaultTags: []
-      defaultQualityProfileId: 1
-      defaultMetadataProfileId: 1
+      defaultTags: [ ]
   downloadclient:
     - name: Transmission
       enable: true

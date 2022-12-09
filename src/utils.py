@@ -9,7 +9,7 @@ class ComplexEncoder(json.JSONEncoder):
 
 
 def remove_keys(obj, keys):
-    if isinstance(obj, list):
+    if isinstance(obj, list) and all(isinstance(i, dict) for i in obj):
         return [remove_keys(item, keys) for item in sorted(obj, key=lambda x: x.get('id', float('inf')))]
     elif isinstance(obj, dict):
         return {k: remove_keys(v, keys) for k, v in obj.items() if k not in keys}

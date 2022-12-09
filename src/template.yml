@@ -17,7 +17,7 @@ lidarr:
   qualityprofile: 
   releaseprofile:
   rootfolder:
-  tag: 
+  tag:
 prowlarr:
   applications: 
   appprofile: 
@@ -49,7 +49,7 @@ radarr:
   qualitydefinition:
   qualityprofile:
   rootfolder:
-  tag: 
+  tag:
 readarr:
   config:
     downloadclient: 
@@ -68,7 +68,7 @@ readarr:
   qualityprofile: 
   releaseprofile:
   rootfolder:
-  tag: 
+  tag:
 sonarr:
   config:
     downloadclient: 
@@ -87,4 +87,4 @@ sonarr:
   qualityprofile: 
   releaseprofile:
   rootfolder:
-  tag: 
+  tag:
