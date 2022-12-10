@@ -5,7 +5,7 @@ from typing import Union
 import yaml
 
 from api import Api
-from utils import remove_keys
+from utils import remove_keys, is_subset, add_missing_keys
 
 
 class AppSetting(yaml.YAMLObject):
@@ -56,8 +56,9 @@ class AppSetting(yaml.YAMLObject):
                 continue  # nothing to be updated
             elif current and new:
                 body = current.copy()
-                body.update(**new)
-                self.api.update(self.resource, id=current['id'], body=body)
+                if not is_subset(new, body):  # check for changes
+                    update_body = add_missing_keys(new, body)
+                    self.api.update(self.resource, id=update_body['id'], body=update_body)
             elif not current:
                 self.api.create(self.resource, body=new)
             elif not new:

@@ -1,4 +1,7 @@
 import json
+from typing import Union
+
+from deepdiff import DeepDiff, Delta
 
 
 class ComplexEncoder(json.JSONEncoder):
@@ -15,6 +18,24 @@ def remove_keys(obj, keys):
         return {k: remove_keys(v, keys) for k, v in obj.items() if k not in keys}
     else:
         return obj
+
+
+def is_subset(d1: Union[dict, list], d2: Union[dict, list]) -> bool:
+    """Check if a nested object is a subset of another nested object.
+    In this case we don't care about new dict keys being added, but rather values being changed or
+    iterable items being added."""
+    delta = Delta(DeepDiff(d1, d2))
+    delta.diff.pop("dictionary_item_added")
+    return not delta.diff
+
+
+def add_missing_keys(d1: Union[dict, list], d2: Union[dict, list]) -> Union[dict, list]:
+    """Update a nested object using a second nested object, add any (nested) dict keys that are missing.
+    Because we don't want to clutter the config file will all keys from the API, we remove some, but have
+    to add them back when caling the API again."""
+    delta = Delta(DeepDiff(d1, d2))
+    [delta.diff.pop(key, None) for key in ['type_changes', 'iterable_item_added', 'values_changed']]
+    return d1 + delta
 
 
 def nest_dict(flat_dict: dict, sep='_', sep_idx=0) -> dict:
