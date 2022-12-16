@@ -44,7 +44,7 @@ def nest_dict(flat_dict: dict, sep='_', sep_idx=0) -> dict:
      -> {"sonarr": {"address": "192.168.0.1", "port": 8989"}} """
     result = {}
     for key, value in flat_dict.items():
-        app, setting = key.split(sep)[sep_idx:]
+        app, setting = key.split(sep, 1)[sep_idx:]  # split on 1st occurrence
         result[app.lower()] = result.get(app.lower(), {})
         result[app.lower()][setting.lower()] = value
     return result

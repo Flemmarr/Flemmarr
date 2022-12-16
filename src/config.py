@@ -18,8 +18,8 @@ class Config(UserDict):
             self._need_to_apply = False
 
         base_cfg = parse_config(API_PATHS_LOCATION, default_value='')
-        for service, location in services.items():
-            api = Api(Service(service), address=location["address"], port=location["port"])
+        for service, config in services.items():
+            api = Api(Service(service), **config)
             base_cfg[service] = self._deep_update(base_cfg[service], data[service], api=api)
         super().__init__(base_cfg)
 

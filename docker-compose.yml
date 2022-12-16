@@ -96,6 +96,7 @@ services:
     environment:
       - SONARR_ADDRESS=sonarr
       - SONARR_PORT=8989
+      - SONARR_API_KEY=155dc8530b5e41159a9a54fce470ea22
       - RADARR_ADDRESS=radarr
       - RADARR_PORT=7878
       - LIDARR_ADDRESS=lidarr

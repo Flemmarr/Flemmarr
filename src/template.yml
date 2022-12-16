@@ -16,7 +16,7 @@ lidarr:
   qualitydefinition: 
   qualityprofile: 
   releaseprofile:
-  rootfolder:
+#  rootfolder: This cannot work, as it requires a QualityProfileId, which is dynamic over time
   tag:
 prowlarr:
   applications: 
@@ -48,7 +48,6 @@ radarr:
   metadata:
   qualitydefinition:
   qualityprofile:
-  rootfolder:
   tag:
 readarr:
   config:
@@ -67,7 +66,6 @@ readarr:
   qualitydefinition: 
   qualityprofile: 
   releaseprofile:
-  rootfolder:
   tag:
 sonarr:
   config:
@@ -86,5 +84,4 @@ sonarr:
   qualitydefinition: 
   qualityprofile: 
   releaseprofile:
-  rootfolder:
   tag:

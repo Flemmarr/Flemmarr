@@ -11,7 +11,7 @@ from constants import API_BASES, Service, UNWANTED_CFG_FIELDS
 
 
 class Api:
-    def __init__(self, service: Service, address: str, port: int, api_key: Optional[str] = None):
+    def __init__(self, service: Service, address: str, port: int, api_key: Optional[str] = None, **kwargs):
         """Wrapper for an *arr api."""
         self.session = None
         self.service = service.value
