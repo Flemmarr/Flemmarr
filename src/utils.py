@@ -1,5 +1,6 @@
 import json
 from typing import Union
+from datetime import datetime
 
 from deepdiff import DeepDiff, Delta
 
@@ -48,3 +49,7 @@ def nest_dict(flat_dict: dict, sep='_', sep_idx=0) -> dict:
         result[app.lower()] = result.get(app.lower(), {})
         result[app.lower()][setting.lower()] = value
     return result
+
+
+def get_datetime_string():
+    return datetime.now().strftime("%Y-%m-%d_%H%M%S")

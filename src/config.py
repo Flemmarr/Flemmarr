@@ -7,7 +7,7 @@ from pyaml_env import parse_config
 from api import Api
 from constants import Service, API_PATHS_LOCATION, BACKUP_DEFAULT_LOCATION, CONFIG_DEFAULT_LOCATION
 from models import AppSetting
-from utils import ComplexEncoder
+from utils import ComplexEncoder, get_datetime_string
 
 
 class Config(UserDict):
@@ -56,12 +56,12 @@ class Config(UserDict):
             print('Successfully finished applying configurations.')
 
     def to_json(self, filename: str):
-        with open(filename, 'w') as file:
+        with open(f"{filename}_{get_datetime_string()}.json", 'w') as file:
             json.dump(self.data, file, cls=ComplexEncoder)
         print('Successfully backed-up current configurations.')
 
     def to_yaml(self, filename: str = BACKUP_DEFAULT_LOCATION):
-        with open(filename, 'w') as file:
+        with open(f"{filename}_{get_datetime_string()}.yml", 'w') as file:
             yaml.dump(self.data, file, default_flow_style=False)
         print('Successfully backed-up current configurations.')
 
