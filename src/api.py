@@ -1,13 +1,17 @@
 from __future__ import annotations
-from typing import Optional, Union
+
+import logging
 from json import JSONDecodeError
+from typing import Optional, Union
+
 import requests
-from requests.models import Response
 from requests.adapters import HTTPAdapter
 from requests.exceptions import HTTPError
+from requests.models import Response
 from urllib3.util import Retry
-from utils import remove_keys
+
 from constants import API_BASES, Service, UNWANTED_CFG_FIELDS
+from utils import remove_keys
 
 
 class Api:
@@ -18,6 +22,7 @@ class Api:
         self.address = address if address.startswith('http') else 'http://' + address
         self.port = port
         self.api_key = api_key
+        self._logger = logging.getLogger(f"Flemmarr.{self.__class__.__name__}")
 
     @property
     def base_url(self) -> str:
@@ -29,14 +34,14 @@ class Api:
         if self.session:  # check if already initialized
             return self
 
-        print(f"Initializing connection to {self.service}")
+        self._logger.info(f"Initializing connection to {self.service}")
         adapter = HTTPAdapter(max_retries=Retry(total=10, backoff_factor=0.1))
         self.session = requests.Session()
         self.session.mount('http://', adapter)
         self.session.mount('https://', adapter)
 
         if not self.api_key:
-            print("No api key in config, fetching api key instead.")
+            self._logger.info("No api key in config, fetching api key instead.")
             response = self.session.get(f"{self.address}:{self.port}/initialize.js")
             bits = response.text.split("'")
             self.api_key = bits[3]
@@ -44,25 +49,28 @@ class Api:
         self.session.headers.update({'X-Api-Key': self.api_key})
 
         self._raise_for_status_and_log(self.session.get(f"{self.base_url}/health"))  # Test connection
-        print('Successfully connected to the server.')
+        self._logger.info('Successfully connected to the server.')
         return self
 
-    @staticmethod
-    def _raise_for_status_and_log(response: Response):
+    def _raise_for_status_and_log(self, response: Response):
         try:
             response.raise_for_status()
         except HTTPError:
-            print(f"ERROR code {response.status_code} on: {response.request.method} {response.url}")
-            try:
-                print(response.json())
-            except JSONDecodeError:
-                print("Response is not JSON.")
-            raise  # TODO: Crash and burn or continue?
+            self._logger.error(f"ERROR code {response.status_code} on: {response.request.method} {response.url}")
+            self._try_log_request_and_response(response)
+            raise
+
+    def _try_log_request_and_response(self, response: Response):
+        try:
+            self._logger.debug(f"Request: {response.request.body}")
+            self._logger.debug(f"Response: {response.json()}")
+        except JSONDecodeError:
+            self._logger.debug(f"Response: {response.text}")
 
     def get(self, resource: str) -> Union[dict, list]:
         """Perform a get request on resource."""
         req = f"{self.base_url}{resource}"
-        print(f"Fetching: {req}")
+        self._logger.info(f"Fetching {req}")
         response = self.session.get(req)
         self._raise_for_status_and_log(response)
         # Filter unwanted response fields and guarantee result sorting
@@ -72,14 +80,15 @@ class Api:
         """Create a new resource."""
         response = self.session.post(f"{self.base_url}{resource}", json=body, timeout=40)
         self._raise_for_status_and_log(response)
-        print(f"Created (one of): {self.base_url}{resource}")
+        self._logger.info(f"Created (one of) {self.base_url}{resource}")
 
     def update(self, resource: str, id: int, body: dict) -> None:
         """Update an existing resource."""
         response = self.session.put(f"{self.base_url}{resource}/{id}", json=body)
         if response.status_code == 400:
             # e.g. lidarr metadataprofile 'None' (default)
-            print("Cannot update, likely a 'reserved' config item.")
+            self._logger.warning("Cannot update, likely a 'reserved' config item.")
+            self._try_log_request_and_response(response)
         elif response.status_code == 405:
             # Resource does not have a PUT method, 'updating' the hard way
             # e.g. 'rootfolder' does not have this.
@@ -88,19 +97,21 @@ class Api:
             self.create(resource, body)
         else:
             self._raise_for_status_and_log(response)
-        print(f"Updated: {self.base_url}{resource}/{id}")
+        self._logger.info(f"Updated {self.base_url}{resource}/{id}")
 
     def delete(self, resource: str, id: int) -> None:
         """Delete existing resource with specified id."""
         req = f"{self.base_url}{resource}/{id}"
-        print(f"Deleting: {req}")
+        self._logger.info(f"Deleting {req}")
         response = self.session.delete(req)
         if response.status_code == 405:
             # Some configs cannot be deleted, e.g. when a default must always exist.
-            print("Skipping unconfigured item that cannot be deleted.")
+            self._logger.warning("Delete method not allowed.")
+            self._try_log_request_and_response(response)
             # Encountering this means config is not reflecting system state.
         elif response.status_code in [400, 500] and "in use" in response.json()['message']:
             # e.g. Readarr metadataprofile gave 400 when in use, and prowlarr appprofile gives 500
-            print("Skipping item that is still in use elsewhere.")
+            self._logger.warning("Cannot delete resource that is still in use.")
+            self._try_log_request_and_response(response)
         else:
             self._raise_for_status_and_log(response)

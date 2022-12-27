@@ -3,6 +3,7 @@ from itertools import zip_longest
 from typing import Union
 
 import yaml
+import logging
 
 from api import Api
 from utils import remove_keys, is_subset, add_missing_keys
@@ -20,6 +21,7 @@ class AppSetting(yaml.YAMLObject):
             self._new_config = [kwargs]
         else:
             self._new_config = [None]
+        self._logger = logging.getLogger(f"Flemmarr.{self.__class__.__name__}")
 
     def __repr__(self):
         return f"{self._current_config}"

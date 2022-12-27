@@ -1,7 +1,16 @@
 import os
+import sys
+import logging
 from config import Config
-from constants import CONFIG_DEFAULT_LOCATION
+from constants import CONFIG_DEFAULT_LOCATION, BACKUP_DEFAULT_FOLDER
 from utils import nest_dict
+
+
+logger = logging.getLogger("Flemmarr")
+logger.setLevel(os.environ.get("LOG_LEVEL", logging.DEBUG))
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setFormatter(logging.Formatter("[%(levelname)s] %(name)s: %(message)s"))
+logger.addHandler(stdout_handler)
 
 
 def main():
@@ -12,12 +21,12 @@ def main():
     )
 
     if cfg_file := os.environ.get("CONFIG_FILE"):
-        cfg = Config.from_yaml(services=params, filename=f"./config/{cfg_file}")
+        cfg = Config.from_yaml(services=params, filename=cfg_file)
     elif os.path.exists(CONFIG_DEFAULT_LOCATION):
         cfg = Config.from_yaml(services=params)
     else:
         cfg = Config(services=params)
-    cfg.to_yaml()
+    cfg.to_yaml(os.environ.get("BACKUP_FOLDER", BACKUP_DEFAULT_FOLDER))
 
     cfg.apply()
 

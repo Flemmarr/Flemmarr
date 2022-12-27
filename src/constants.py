@@ -1,7 +1,7 @@
 from enum import Enum
 
 CONFIG_DEFAULT_LOCATION = './config/config.yml'
-BACKUP_DEFAULT_LOCATION = './config/config_backup'
+BACKUP_DEFAULT_FOLDER = 'config'
 API_PATHS_LOCATION = "template.yml"
 
 API_BASES = {
