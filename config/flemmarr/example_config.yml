@@ -1,0 +1,796 @@
+sonarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 1 # 1 = English, 2 = French, 3 = Spanish...
+  qualityprofile:
+  - cutoff: 1
+    items:
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          name: WEBRip-480p
+          resolution: 480
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+          name: WEBDL-480p
+          resolution: 480
+          source: web
+      name: WEB 480p
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          name: WEBRip-720p
+          resolution: 720
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+          name: WEBDL-720p
+          resolution: 720
+          source: web
+      name: WEB 720p
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webRip
+      - allowed: true
+        items: []
+        quality:
+          name: WEBDL-1080p
+          resolution: 1080
+          source: web
+      name: WEB 1080p
+    - allowed: false
+      items:
+      - allowed: false
+        items: []
+        quality:
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webRip
+      - allowed: false
+        items: []
+        quality:
+          name: WEBDL-2160p
+          resolution: 2160
+          source: web
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: true
+      items: []
+      quality:
+        name: SDTV
+        resolution: 480
+        source: television
+    - allowed: true
+      items: []
+      quality:
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        name: HDTV-720p
+        resolution: 720
+        source: television
+    - allowed: true
+      items: []
+      quality:
+        name: HDTV-1080p
+        resolution: 1080
+        source: television
+    - allowed: false
+      items: []
+      quality:
+        name: Raw-HD
+        resolution: 1080
+        source: televisionRaw
+    - allowed: true
+      items: []
+      quality:
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-1080p Remux
+        resolution: 1080
+        source: blurayRaw
+    - allowed: false
+      items: []
+      quality:
+        name: HDTV-2160p
+        resolution: 2160
+        source: television
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        name: Bluray-2160p Remux
+        resolution: 2160
+        source: blurayRaw
+    name: Any
+    upgradeAllowed: false
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+radarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 1 # 1 = English, 2 = French, 3 = Spanish...
+  qualityprofile:
+  - cutoff: 20
+    cutoffFormatScore: 0
+    formatItems: []
+    items:
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBDL-480p
+          resolution: 480
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBRip-480p
+          resolution: 480
+          source: webrip
+      name: WEB 480p
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBDL-720p
+          resolution: 720
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBRip-720p
+          resolution: 720
+          source: webrip
+      name: WEB 720p
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBDL-1080p
+          resolution: 1080
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBRip-1080p
+          resolution: 1080
+          source: webrip
+      name: WEB 1080p
+    - allowed: true
+      items:
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBDL-2160p
+          resolution: 2160
+          source: webdl
+      - allowed: true
+        items: []
+        quality:
+          modifier: none
+          name: WEBRip-2160p
+          resolution: 2160
+          source: webrip
+      name: WEB 2160p
+    - allowed: false
+      items: []
+      quality:
+        modifier: none
+        name: Unknown
+        resolution: 0
+        source: unknown
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: WORKPRINT
+        resolution: 0
+        source: workprint
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: CAM
+        resolution: 0
+        source: cam
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: TELESYNC
+        resolution: 0
+        source: telesync
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: TELECINE
+        resolution: 0
+        source: telecine
+    - allowed: true
+      items: []
+      quality:
+        modifier: regional
+        name: REGIONAL
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+        modifier: screener
+        name: DVDSCR
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: SDTV
+        resolution: 480
+        source: tv
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: DVD
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+        modifier: remux
+        name: DVD-R
+        resolution: 480
+        source: dvd
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: Bluray-480p
+        resolution: 480
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: Bluray-576p
+        resolution: 576
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: HDTV-720p
+        resolution: 720
+        source: tv
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: Bluray-720p
+        resolution: 720
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: HDTV-1080p
+        resolution: 1080
+        source: tv
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: Bluray-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: remux
+        name: Remux-1080p
+        resolution: 1080
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: HDTV-2160p
+        resolution: 2160
+        source: tv
+    - allowed: true
+      items: []
+      quality:
+        modifier: none
+        name: Bluray-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: remux
+        name: Remux-2160p
+        resolution: 2160
+        source: bluray
+    - allowed: true
+      items: []
+      quality:
+        modifier: brdisk
+        name: BR-DISK
+        resolution: 1080
+        source: bluray
+    - allowed: false
+      items: []
+      quality:
+        modifier: rawhd
+        name: Raw-HD
+        resolution: 1080
+        source: tv
+    language:
+      name: English
+    minFormatScore: 0
+    name: Any
+    upgradeAllowed: false
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+lidarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 1 # 1 = English, 2 = French, 3 = Spanish...
+  qualityprofile:
+    - cutoff: 13
+      items:
+        - allowed: false
+          items:
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-8
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-16
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-24
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-32
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-40
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-48
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-56
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-64
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-80
+          name: Trash Quality Lossy
+        - allowed: false
+          items:
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-96
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-112
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-128
+            - allowed: false
+              items: [ ]
+              quality:
+                name: OGG Vorbis Q5
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-160
+          name: Poor Quality Lossy
+        - allowed: false
+          items:
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-192
+            - allowed: false
+              items: [ ]
+              quality:
+                name: OGG Vorbis Q6
+            - allowed: false
+              items: [ ]
+              quality:
+                name: AAC-192
+            - allowed: false
+              items: [ ]
+              quality:
+                name: WMA
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-224
+          name: Low Quality Lossy
+        - allowed: false
+          items:
+            - allowed: false
+              items: [ ]
+              quality:
+                name: OGG Vorbis Q7
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-VBR-V2
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-256
+            - allowed: false
+              items: [ ]
+              quality:
+                name: OGG Vorbis Q8
+            - allowed: false
+              items: [ ]
+              quality:
+                name: AAC-256
+          name: Mid Quality Lossy
+        - allowed: false
+          items:
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-VBR-V0
+            - allowed: false
+              items: [ ]
+              quality:
+                name: AAC-VBR
+            - allowed: false
+              items: [ ]
+              quality:
+                name: MP3-320
+            - allowed: false
+              items: [ ]
+              quality:
+                name: OGG Vorbis Q9
+            - allowed: false
+              items: [ ]
+              quality:
+                name: AAC-320
+            - allowed: false
+              items: [ ]
+              quality:
+                name: OGG Vorbis Q10
+          name: High Quality Lossy
+        - allowed: true
+          items:
+            - allowed: true
+              items: [ ]
+              quality:
+                name: ALAC
+            - allowed: true
+              items: [ ]
+              quality:
+                name: FLAC
+            - allowed: true
+              items: [ ]
+              quality:
+                name: APE
+            - allowed: true
+              items: [ ]
+              quality:
+                name: WavPack
+            - allowed: true
+              items: [ ]
+              quality:
+                name: FLAC 24bit
+          name: Lossless
+        - allowed: false
+          items: [ ]
+          quality:
+            name: Unknown
+        - allowed: true
+          items: [ ]
+          quality:
+            name: WAV
+      name: QualityProfile1
+      upgradeAllowed: false
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+readarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
+      timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+      uiLanguage: 1 # 1 = English, 2 = French, 3 = Spanish...
+  qualityprofile:
+    - cutoff: 2
+      items:
+        - allowed: false
+          items: [ ]
+          quality:
+            name: Unknown Text
+        - allowed: false
+          items: [ ]
+          quality:
+            name: PDF
+        - allowed: true
+          items: [ ]
+          quality:
+            name: MOBI
+        - allowed: true
+          items: [ ]
+          quality:
+            name: EPUB
+        - allowed: true
+          items: [ ]
+          quality:
+            name: AZW3
+        - allowed: false
+          items: [ ]
+          quality:
+            name: Unknown Audio
+        - allowed: false
+          items: [ ]
+          quality:
+            name: MP3
+        - allowed: false
+          items: [ ]
+          quality:
+            name: M4B
+        - allowed: false
+          items: [ ]
+          quality:
+            name: FLAC
+      name: eBook
+      upgradeAllowed: false
+    - cutoff: 10
+      items:
+        - allowed: false
+          items: [ ]
+          quality:
+            name: Unknown Text
+        - allowed: false
+          items: [ ]
+          quality:
+            name: PDF
+        - allowed: false
+          items: [ ]
+          quality:
+            name: MOBI
+        - allowed: false
+          items: [ ]
+          quality:
+            name: EPUB
+        - allowed: false
+          items: [ ]
+          quality:
+            name: AZW3
+        - allowed: true
+          items: [ ]
+          quality:
+            name: Unknown Audio
+        - allowed: true
+          items: [ ]
+          quality:
+            name: MP3
+        - allowed: true
+          items: [ ]
+          quality:
+            name: M4B
+        - allowed: true
+          items: [ ]
+          quality:
+            name: FLAC
+      name: Spoken
+      upgradeAllowed: false
+  downloadclient:
+    - name: Transmission
+      enable: true
+      protocol: torrent
+      fields:
+        - name: host
+          value: transmission
+        - name: port
+          value: 9091
+      implementation: Transmission
+      configContract: TransmissionSettings
+prowlarr:
+  config:
+    host:
+      analyticsEnabled: false
+    ui:
+      theme: dark
+  indexer:
+  - appProfileId: 0
+    configContract: CardigannSettings
+    definitionName: internetarchive
+    enable: true
+    encoding: Unicode (UTF-8)
+    fields:
+    - hidden: hidden
+      name: definitionFile
+      value: internetarchive
+    - name: baseUrl
+      selectOptionsProviderAction: getUrls
+    - name: baseSettings.queryLimit
+    - name: baseSettings.grabLimit
+    - name: torrentBaseSettings.seedRatio
+    - name: torrentBaseSettings.seedTime
+      unit: minutes
+    - name: titleOnly
+      value: true
+    - name: noMagnet
+      value: false
+    - name: sort
+      value: 2
+    - name: type
+      value: 1
+    implementation: Cardigann
+    implementationName: Cardigann
+    indexerUrls:
+    - https://archive.org/
+    language: en-US
+    legacyUrls: []
+    name: Internet Archive
+    priority: 0
+    privacy: public
+    protocol: torrent
+    redirect: false
+    sortName: internet archive
+    supportsRedirect: false
+    supportsRss: true
+    supportsSearch: true
+    tags: []
+  tags: []
+  applications:
+    - name: Sonarr
+      syncLevel: addOnly
+      implementation: Sonarr
+      configContract: SonarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.65:9696
+        - name: baseUrl
+          value: http://192.168.178.65:8989
+        - name: apiKey
+          value: 155dc8530b5e41159a9a54fce470ea22
+    - name: Radarr
+      syncLevel: addOnly
+      implementation: Radarr
+      configContract: RadarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.65:9696
+        - name: baseUrl
+          value: http://192.168.178.65:7878
+        - name: apiKey
+          value: be3f73d43ad94d42af8c5442464c1c9e
+    - name: Lidarr
+      syncLevel: addOnly
+      implementation: Lidarr
+      configContract: LidarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.65:9696
+        - name: baseUrl
+          value: http://192.168.178.65:8686
+        - name: apiKey
+          value: 6535bf69ff504ab79dea59790e88d2e6
+    - name: Readarr
+      syncLevel: addOnly
+      implementation: Readarr
+      configContract: ReadarrSettings
+      fields:
+        - name: prowlarrUrl
+          value: http://192.168.178.65:9696
+        - name: baseUrl
+          value: http://192.168.178.65:8787
+        - name: apiKey
+          value: ef11e3c4e4484c429e6a5fadb19491f2

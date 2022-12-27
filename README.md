@@ -51,13 +51,13 @@ lidarr:
       uiLanguage: 2 # 1 = English, 2 = French, 3 = Spanish...
   rootfolder:
     - name: Music
-      path: /data/music
+      path: !ENV ${ROOTFOLDER_PATH}
       defaultTags: []
       defaultQualityProfileId: 1
       defaultMetadataProfileId: 1
 ```
 
-Check out the example [config.yml](config/flemmarr/config.yml) with more settings for various apps.
+Check out the example [config.yml](config/flemmarr/config.yml) with more settings for various apps, or [example_backup.yml](config/flemmarr/example_backup.yml) for all supported settings. Use environment variables where needed by using the `!ENV ${ENV_VAR}` syntax. They can be added in an untracked `.env` file.
 
 **NB:** Unfortunately, I found the APIs for all -arr tools to be of poor quality. Oftentimes, some fields are needed for no reason, default values are not the same as the ones applied by the GUI.
 
@@ -69,6 +69,11 @@ If you cannot find how to change a specific part of the configuration in this fi
 - ask for help here by creating an issue.
 
 Once you've found the solution, please add it to the example config file so others can benefit from your knowledge.
+
+## Backup
+A backup of the current configuration will be created automatically and stored in `/config/config_backup.yml`. If you only want
+to create a backup and do not apply a config, simply do not provide a `/config/config.yml` file.
+
 
 ## Contributing
 

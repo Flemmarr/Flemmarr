@@ -69,6 +69,8 @@ services:
     ports:
       - 9696:9696
     restart: unless-stopped
+    dns:
+      - 192.168.178.47
   transmission:
     container_name: transmission
     image: lscr.io/linuxserver/transmission:latest
@@ -87,7 +89,19 @@ services:
     restart: unless-stopped
   flemmarr:
     container_name: flemmarr
-    image: pierremesure/flemmarr:latest
-    # build: ./
+#    image: pierremesure/flemmarr:latest
+    build: ./
     volumes:
       - "./config/flemmarr:/config"
+    environment:
+      - SONARR_ADDRESS=sonarr
+      - SONARR_PORT=8989
+      - SONARR_API_KEY=155dc8530b5e41159a9a54fce470ea22
+      - RADARR_ADDRESS=radarr
+      - RADARR_PORT=7878
+      - LIDARR_ADDRESS=lidarr
+      - LIDARR_PORT=8686
+      - READARR_ADDRESS=readarr
+      - READARR_PORT=8787
+      - PROWLARR_ADDRESS=prowlarr
+      - PROWLARR_PORT=9696
