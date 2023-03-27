@@ -481,7 +481,7 @@ prowlarr:
         - name: baseUrl
           value: http://sonarr:8989
         - name: apiKey
-          value: 0b03bd0d793946f28ae66c42ac1f6919
+          value: !ENV ${SONARR_API_KEY}
     - name: Radarr
       syncLevel: addOnly
       implementation: Radarr
