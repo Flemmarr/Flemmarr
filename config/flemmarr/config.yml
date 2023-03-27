@@ -8,6 +8,51 @@ sonarr:
     ui:
       firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
       timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
+    naming:
+      renameEpisodes: true
+      replaceIllegalCharacters: true
+      multiEpisodeStyle: 5
+      # https://trash-guides.info/Sonarr/Sonarr-recommended-naming-scheme/
+      standardEpisodeFormat: "{Series TitleYear} - S{season:00}E{episode:00} - {Episode
+        CleanTitle} [{Preferred Words }{Quality Full}]{[MediaInfo VideoDynamicRangeType]}{[Mediainfo
+        AudioCodec}{ Mediainfo AudioChannels]}{MediaInfo AudioLanguages}{[MediaInfo VideoCodec]}{-Release
+        Group}"
+      dailyEpisodeFormat: "{Series TitleYear} - {Air-Date} - {Episode CleanTitle} [{Preferred
+        Words }{Quality Full}]{[MediaInfo VideoDynamicRangeType]}{[Mediainfo AudioCodec}{
+        Mediainfo AudioChannels]}{MediaInfo AudioLanguages}{[MediaInfo VideoCodec]}{-Release
+        Group}"
+      animeEpisodeFormat: "{Series TitleYear} - S{season:00}E{episode:00} - {absolute:000}
+        - {Episode CleanTitle} [{Preferred Words }{Quality Full}]{[MediaInfo VideoDynamicRangeType]}[{MediaInfo
+        VideoBitDepth}bit]{[MediaInfo VideoCodec]}[{Mediainfo AudioCodec} { Mediainfo AudioChannels}]{MediaInfo
+        AudioLanguages}{-Release Group}"
+      seriesFolderFormat: "{Series TitleYear} [imdb-{ImdbId}]"
+      seasonFolderFormat: Season {season:00}
+      specialsFolderFormat: Specials
+      includeSeriesTitle: false
+      includeEpisodeTitle: false
+      includeQuality: false
+      replaceSpaces: true
+      separator: " - "
+      numberStyle: S{season:00}E{episode:00}
+    mediamanagement:
+      autoUnmonitorPreviouslyDownloadedEpisodes: false
+      recycleBin: ''
+      recycleBinCleanupDays: 7
+      downloadPropersAndRepacks: doNotUpgrade
+      createEmptySeriesFolders: false
+      deleteEmptyFolders: false
+      fileDate: none
+      rescanAfterRefresh: always
+      setPermissionsLinux: false
+      chmodFolder: '755'
+      chownGroup: ''
+      episodeTitleRequired: always
+      skipFreeSpaceCheckWhenImporting: true
+      minimumFreeSpaceWhenImporting: 100
+      copyUsingHardlinks: true
+      importExtraFiles: true
+      extraFileExtensions: srt
+      enableMediaInfo: true
   rootfolder:
     - name: Series
       path: /data/series
@@ -18,6 +63,7 @@ sonarr:
     - name: Transmission
       enable: true
       protocol: torrent
+      priority: 1
       fields:
         - name: host
           value: transmission
@@ -25,6 +71,135 @@ sonarr:
           value: 9091
       implementation: Transmission
       configContract: TransmissionSettings
+    - name: qBittorrent
+      enable: true
+      protocol: torrent
+      priority: 2
+      removeCompletedDownloads: true
+      removeFailedDownloads: true
+      fields:
+      - name: host
+        value: qbittorrent
+      - name: port
+        value: 8080
+      - name: username
+        value: username
+      - name: password
+        value: password
+      - name: tvCategory
+        value: tv
+      - name: recentTvPriority
+        value: 0
+      - name: olderTvPriority
+        value: 0
+      - name: initialState
+        value: 0
+      - name: sequentialOrder
+        value: false
+      - name: firstAndLast
+        value: false
+      implementation: QBittorrent
+      configContract: QBittorrentSettings
+  # https://trash-guides.info/Sonarr/Sonarr-Quality-Settings-File-Size/
+  qualityDefinition:
+    7:
+      title: HDTV-720p
+      weight: 6
+      minSize: 10
+      maxSize: 67.5
+      preferredSize: 66.5
+      id: 7
+    8:
+      title: HDTV-1080p
+      weight: 7
+      minSize: 15
+      maxSize: 137.3
+      preferredSize: 136.3
+      id: 8
+    10:
+      title: WEBRip-720p
+      weight: 9
+      minSize: 10
+      maxSize: 137.3
+      preferredSize: 136.3
+      id: 10
+    11:
+      title: WEBDL-720p
+      weight: 9
+      minSize: 10
+      maxSize: 137.3
+      preferredSize: 136.3
+      id: 11
+    12:
+      title: Bluray-720p
+      weight: 10
+      minSize: 17.1
+      maxSize: 137.3
+      preferredSize: 136.3
+      id: 12
+    13:
+      title: WEBRip-1080p
+      weight: 11
+      minSize: 15
+      maxSize: 137.3
+      preferredSize: 136.3
+      id: 13
+    14:
+      title: WEBDL-1080p
+      weight: 11
+      minSize: 15
+      maxSize: 137.3
+      preferredSize: 136.3
+      id: 14
+    15:
+      title: Bluray-1080p
+      weight: 12
+      minSize: 50.4
+      maxSize: 227
+      preferredSize: 226
+      id: 15
+    16:
+      title: Bluray-1080p Remux
+      weight: 13
+      minSize: 69.1
+      maxSize: 400
+      preferredSize: 399
+      id: 16
+    17:
+      title: HDTV-2160p
+      weight: 14
+      minSize: 50.4
+      maxSize: 350
+      preferredSize: 349
+      id: 17
+    18:
+      title: WEBRip-2160p
+      weight: 15
+      minSize: 50.4
+      maxSize: 350
+      preferredSize: 349
+      id: 18
+    19:
+      title: WEBDL-2160p
+      weight: 15
+      minSize: 50.4
+      maxSize: 350
+      preferredSize: 349
+      id: 19
+    20:
+      title: Bluray-2160p
+      weight: 16
+      minSize: 94.6
+      maxSize: 400
+      preferredSize: 399
+      id: 20
+    21:
+      title: Bluray-2160p Remux
+      weight: 17
+      minSize: 204.4
+      maxSize: 400
+      preferredSize: 399
+      id: 21
 radarr:
   server:
     address: radarr
@@ -36,6 +211,35 @@ radarr:
       firstDayOfWeek: 1 # 0 = Sunday, 1 = Monday
       timeFormat: HH:mm # HH:mm = 17:30, h(:mm)a = 5:30PM
       uiLanguage: 2 # 1 = English, 2 = French, 3 = Spanish...
+    naming:
+      renameMovies: true
+      replaceIllegalCharacters: true
+      colonReplacementFormat: spaceDashSpace
+      # https://trash-guides.info/Radarr/Radarr-recommended-naming-scheme/
+      standardMovieFormat: "{Movie CleanTitle} {(Release Year)} {imdb-{ImdbId}} {edition-{Edition Tags}} {[Custom Formats]}{[Quality Full]}{[MediaInfo 3D]}{[MediaInfo VideoDynamicRangeType]}{[Mediainfo AudioCodec}{ Mediainfo AudioChannels}][{Mediainfo VideoCodec}]{-Release Group}"
+      movieFolderFormat: "{Movie CleanTitle} ({Release Year})"
+      includeQuality: false
+      replaceSpaces: false
+    mediamanagement:
+      autoUnmonitorPreviouslyDownloadedMovies: true
+      recycleBin: ''
+      recycleBinCleanupDays: 7
+      downloadPropersAndRepacks: doNotUpgrade
+      createEmptyMovieFolders: false
+      deleteEmptyFolders: false
+      fileDate: none
+      rescanAfterRefresh: always
+      autoRenameFolders: false
+      pathsDefaultStatic: false
+      setPermissionsLinux: false
+      chmodFolder: '755'
+      chownGroup: ''
+      skipFreeSpaceCheckWhenImporting: true
+      minimumFreeSpaceWhenImporting: 100
+      copyUsingHardlinks: true
+      importExtraFiles: true
+      extraFileExtensions: srt
+      enableMediaInfo: true
   rootfolder:
     - name: Movies
       path: /data/movies
@@ -46,6 +250,7 @@ radarr:
     - name: Transmission
       enable: true
       protocol: torrent
+      priority: 1
       fields:
         - name: host
           value: transmission
@@ -53,6 +258,135 @@ radarr:
           value: 9091
       implementation: Transmission
       configContract: TransmissionSettings
+    - name: qBittorrent
+      enable: true
+      protocol: torrent
+      priority: 2
+      removeCompletedDownloads: true
+      removeFailedDownloads: true
+      fields:
+      - name: host
+        value: qbittorrent
+      - name: port
+        value: 8080
+      - name: username
+        value: username
+      - name: password
+        value: password
+      - name: movieCategory
+        value: movies
+      - name: recentMoviePriority
+        value: 0
+      - name: olderMoviePriority
+        value: 0
+      - name: initialState
+        value: 0
+      - name: sequentialOrder
+        value: false
+      - name: firstAndLast
+        value: false
+      implementation: QBittorrent
+      configContract: QBittorrentSettings
+  # https://trash-guides.info/Radarr/Radarr-Quality-Settings-File-Size/
+  qualityDefinition:
+    15:
+      title: HDTV-720p
+      weight: 14
+      minSize: 17.1
+      maxSize: 400
+      preferredSize: 399
+      id: 15
+    16:
+      title: WEBDL-720p
+      weight: 15
+      minSize: 12.5
+      maxSize: 400
+      preferredSize: 399
+      id: 16
+    17:
+      title: WEBRip-720p
+      weight: 15
+      minSize: 12.5
+      maxSize: 400
+      preferredSize: 399
+      id: 17
+    18:
+      title: Bluray-720p
+      weight: 16
+      minSize: 25.7
+      maxSize: 400
+      preferredSize: 399
+      id: 18
+    19: 
+      title: HDTV-1080p
+      weight: 17
+      minSize: 33.8
+      maxSize: 400
+      preferredSize: 399
+      id: 19
+    20: 
+      title: WEBDL-1080p
+      weight: 18
+      minSize: 12.5
+      maxSize: 400
+      preferredSize: 399
+      id: 20
+    21: 
+      title: WEBRip-1080p
+      weight: 18
+      minSize: 12.5
+      maxSize: 400
+      preferredSize: 399
+      id: 21
+    22: 
+      title: Bluray-1080p
+      weight: 19
+      minSize: 50.8
+      maxSize: 400
+      preferredSize: 399
+      id: 22
+    23:
+      title: Remux-1080p
+      weight: 20
+      minSize: 136.8
+      maxSize: 400
+      preferredSize: 399
+      id: 23
+    24:
+      title: HDTV-2160p
+      weight: 21
+      minSize: 85
+      maxSize: 400
+      preferredSize: 399
+      id: 24
+    25:
+      title: WEBDL-2160p
+      weight: 22
+      minSize: 34.5
+      maxSize: 400
+      preferredSize: 399
+      id: 25
+    26:
+      title: WEBRip-2160p
+      weight: 22
+      minSize: 34.5
+      maxSize: 400
+      preferredSize: 399
+      id: 26
+    27:
+      title: Bluray-2160p
+      weight: 23
+      minSize: 102
+      maxSize: 400
+      preferredSize: 399
+      id: 27
+    28:
+      title: Remux-2160p
+      weight: 24
+      minSize: 187.4
+      maxSize: 400
+      preferredSize: 399
+      id: 28
 lidarr:
   server:
     address: lidarr
