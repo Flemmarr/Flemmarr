@@ -10,7 +10,7 @@ class Api(object):
         self.path = ""
 
         adapter = requests.adapters.HTTPAdapter(
-            max_retries=Retry(total=1, backoff_factor=0.1)
+            max_retries=Retry(total=5, backoff_factor=0.1)
         )
 
         self.r = requests.Session()
