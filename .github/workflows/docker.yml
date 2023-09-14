@@ -1,12 +1,12 @@
 name: docker
 on:
+  workflow_dispatch:
   push:
-    workflow_dispatch:
     branches:
       - 'master'
 
 jobs:
-  docker:
+  docker-build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
