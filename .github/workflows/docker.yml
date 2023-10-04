@@ -3,7 +3,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - 'master'
+      - "master"
+  pull_request:
+    branches:
+      - "master"
 
 jobs:
   docker-build:
@@ -26,4 +29,6 @@ jobs:
           context: .
           platforms: linux/amd64, linux/arm64, linux/arm/v7
           push: true
-          tags: aidanhilt/flemmarr:latest
+          tags: |
+            ${{ github.event_name == 'push' && 'aidanhilt/flemmarr:latest' 
+              || github.event_name == 'pull_request' && format('aidanhilt/flemmarr:{0}', github.head_ref) }}
