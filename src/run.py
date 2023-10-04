@@ -14,7 +14,14 @@ for key in configs:
     server = config["server"]
     config.pop("server")
 
-    api = Api(server["address"], server["port"])
+    baseUrl = ""
+    if server["baseUrl"]:
+        baseUrl = server["baseUrl"]
+
+    if baseUrl[0] != "/":
+        baseUrl = "/" + baseUrl
+
+    api = Api(server["address"], server["port"], baseUrl)
 
     print("Trying to connect to {}".format(key))
     api.initialize()

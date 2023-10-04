@@ -4,10 +4,10 @@ import json
 
 
 class Api(object):
-    def __init__(self, address, port):
+    def __init__(self, address, port, baseUrl):
         self.address = address
         self.port = port
-        self.path = ""
+        self.path = baseUrl
 
         adapter = requests.adapters.HTTPAdapter(
             max_retries=Retry(total=5, backoff_factor=0.1)
