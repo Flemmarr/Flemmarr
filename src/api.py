@@ -89,6 +89,8 @@ class Api(object):
         print("Trying to connect to the server with the v3 method")
         response = self.r.get("{}/initialize.js".format(self.__url()), timeout=5)
 
+        print(json.dumps(response.json(), indent=2))
+
         if response.status_code == 200:
             print("Successfully connected to the server with the v3 method")
             bits = response.text.split("'")
