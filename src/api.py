@@ -75,11 +75,12 @@ class Api(object):
                 self.__create(resource, body)
 
     def initialize(self):
-        response = self.r.get('{}/initialize.js'.format(self.__url()))
+        response = self.r.get('{}/initialize.json'.format(self.__url()))
 
-        bits = response.text.split("'")
-        api_root = bits[1]
-        api_key = bits[3]
+        response_data = response.json()
+        
+        api_root = response_data["apiRoot"]
+        api_key = response_data["apiKey"]
 
         self.path = api_root
         self.r.headers.update({'X-Api-Key': api_key})
